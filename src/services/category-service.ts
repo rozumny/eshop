@@ -1,16 +1,18 @@
-import {Injectable} from "@angular/core";
-import {CATEGORIES} from "./mock-categories";
+import { Injectable } from "@angular/core";
+import { FileService } from "./file-service";
+import { Utils } from "./utils-service";
 
 @Injectable()
 export class CategoryService {
   private categories: any;
 
-  constructor() {
-    this.categories = CATEGORIES;
+  constructor(private fileService: FileService) {
   }
 
-  getAll() {
-    return this.categories;
+  getAll(): Promise<any[]> {
+    return this.fileService.get("categories").then(result => {
+      return Utils.objectToArrayStoreKeys(result);
+    })
   }
 
   getItem(id) {

@@ -1,12 +1,13 @@
-import {Component} from '@angular/core';
-import {NavController} from 'ionic-angular';
-import {CategoryService} from '../../services/category-service';
-import {ItemService} from '../../services/item-service';
-import {CategoriesPage} from "../categories/categories";
-import {CategoryPage} from "../category/category";
-import {ItemPage} from "../item/item";
-import {SearchPage} from "../search/search";
-import {CartPage} from "../cart/cart";
+import { Component } from '@angular/core';
+import { NavController } from 'ionic-angular';
+import { CategoryService } from '../../services/category-service';
+import { FileService } from '../../services/file-service';
+import { ItemService } from '../../services/item-service';
+import { CategoriesPage } from "../categories/categories";
+import { CategoryPage } from "../category/category";
+import { ItemPage } from "../item/item";
+import { SearchPage } from "../search/search";
+import { CartPage } from "../cart/cart";
 
 
 /*
@@ -34,13 +35,18 @@ export class HomePage {
   ];
 
   // list categories
-  public categories: any;
+  public categories: any[] = [];
 
   // list of items
   public items: any;
 
-  constructor(public nav: NavController, public categoryService: CategoryService, public itemService: ItemService) {
-    this.categories = categoryService.getAll();
+  constructor(public nav: NavController,
+    public categoryService: CategoryService,
+    public fileService: FileService,
+    public itemService: ItemService) {
+    categoryService.getAll().then(categories => {
+      this.categories = categories;
+    });
 
     this.items = itemService.getAll();
   }
@@ -52,12 +58,12 @@ export class HomePage {
 
   // view a category
   viewCategory(catId) {
-    this.nav.push(CategoryPage, {id: catId});
+    this.nav.push(CategoryPage, { id: catId });
   }
 
   // view a item
   viewItem(itemId) {
-    this.nav.push(ItemPage, {id: itemId})
+    this.nav.push(ItemPage, { id: itemId })
   }
 
   // go to search page

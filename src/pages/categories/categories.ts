@@ -1,8 +1,8 @@
-import {Component} from '@angular/core';
-import {NavController} from 'ionic-angular';
-import {CategoryService} from '../../services/category-service';
-import {CategoryPage} from '../category/category';
-import {CartPage} from "../cart/cart";
+import { Component } from '@angular/core';
+import { NavController } from 'ionic-angular';
+import { CategoryService } from '../../services/category-service';
+import { CategoryPage } from '../category/category';
+import { CartPage } from "../cart/cart";
 
 /*
  Generated class for the LoginPage page.
@@ -16,15 +16,17 @@ import {CartPage} from "../cart/cart";
 })
 export class CategoriesPage {
   // list of categories
-  public categories: any;
+  public categories: any[];
 
   constructor(public nav: NavController, public categoryService: CategoryService) {
-    this.categories = categoryService.getAll();
+    categoryService.getAll().then(categories => {
+      this.categories = categories;
+    });
   }
 
   // view category
   viewCategory(categoryId) {
-    this.nav.push(CategoryPage, {id: categoryId});
+    this.nav.push(CategoryPage, { id: categoryId });
   }
 
   // view cart

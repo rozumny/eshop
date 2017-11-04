@@ -41,9 +41,9 @@
   <ion-card>
     <ion-list class="cat-list">
       <ion-row>
-        <ion-col *ngFor="let cat of categories | slice:0:3; let i = index" (click)="viewCategory(cat.id)">
-          <img src="{{ cat.thumb }}" alt="">
-          <div text-center>{{ cat.name }}</div>
+        <ion-col *ngFor="let cat of categories | slice:0:3; let i = index" (click)="viewCategory(cat.key)">
+          <img src="{{ fileService.url + '/' + cat.filename }}" alt="">
+          <div text-center>{{ cat.title }}</div>
         </ion-col>
         <ion-col text-center (click)="viewCategories()">
           <img src="assets/img/categories/all.png" alt="">
