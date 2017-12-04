@@ -1,7 +1,7 @@
 export let CARTS = {
   subtotal: 930,
   shipping: 30,
-  total: 950,
+  total: 920,
   sellers: [
     {
       id: 1,
@@ -30,26 +30,6 @@ export let CARTS = {
           options: [
             "Bundle 2",
             "White"
-          ]
-        }
-      ]
-    },
-    {
-      id: 2,
-      name: "Jahurto Inexpensive",
-      subtotal: 20,
-      shipping: 10,
-      total: 30,
-      items: [
-        {
-          id: 1,
-          name: "Zara coat",
-          price: 20,
-          quantity: 1,
-          thumb: "assets/img/items/item_5.jpg",
-          options: [
-            "XL",
-            "Pink"
           ]
         }
       ]

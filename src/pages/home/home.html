@@ -10,14 +10,14 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title>{{ title }}</ion-title>
     <ion-buttons end>
       <button ion-button (click)="goToSearch()">
         <ion-icon name="search"></ion-icon>
       </button>
-      <button ion-button>
+      <!-- <button ion-button>
         <ion-icon name="qr-scanner"></ion-icon>
-      </button>
+      </button> -->
       <button ion-button (click)="goToCart()">
         <ion-icon name="cart"></ion-icon>
       </button>
@@ -28,8 +28,7 @@
 
 
 <ion-content class=" common-bg">
-  <!-- slider on top-->
-  <ion-slides pager autoplay="2000">
+  <ion-slides pager autoplay="4000">
 
     <ion-slide *ngFor="let slide of slides">
       <img src="{{ slide.src }}" alt="">
@@ -38,22 +37,25 @@
   </ion-slides>
 
   <!--list categories-->
+  <!-- <h4 text-center>{{ 'categories_title' | translate }}</h4> -->
+
   <ion-card>
     <ion-list class="cat-list">
       <ion-row>
-        <ion-col *ngFor="let cat of categories | slice:0:3; let i = index" (click)="viewCategory(cat.key)">
-          <img src="{{ fileService.url + '/' + cat.filename }}" alt="">
+        <ion-col *ngFor="let cat of categories | slice:0:3; let i = index" (click)="viewCategory(cat)">
+          <div class="category" [style.backgroundImage]="'url(' + fileService.url + '/' + cat.filename + ')'">&nbsp;</div>
+          <!-- <img src="{{ fileService.url + '/' + cat.filename }}" alt=""> -->
           <div text-center>{{ cat.title }}</div>
         </ion-col>
         <ion-col text-center (click)="viewCategories()">
           <img src="assets/img/categories/all.png" alt="">
-          <div text-center>All categories</div>
+          <div text-center>{{'all_categories' | translate}}</div>
         </ion-col>
       </ion-row>
     </ion-list>
   </ion-card>
 
-  <!--Deals-->
+  <!-- Deals
   <ion-grid class="grid-no-padding deals">
     <ion-row>
       <ion-col text-center>
@@ -71,17 +73,23 @@
         </ion-card>
       </ion-col>
     </ion-row>
-  </ion-grid>
+  </ion-grid> -->
 
-  <h4 text-center>JUST FOR YOU</h4>
+  <h4 text-center>{{ 'home_products_title' | translate }}</h4>
 
   <!--List of items-->
   <ion-grid class="list-cards">
     <ion-row>
-      <ion-col *ngFor="let item of items" col-6 class="product" (click)="viewItem(item.id)">
+      <ion-col *ngFor="let item of items" col-6 class="product" (click)="viewItem(item.key)">
         <div class="card light-bg">
-          <img src="{{ item.thumb }}" alt="{{ item.name }}">
-          <div class="price" text-center>{{ item.price | currency:'USD':true }}</div>
+          <img class="image" *ngIf="item.filenames && item.filenames.length > 0" src="{{ fileService.url + '/' + item.filenames[0] }}"
+            alt="{{ item.title }}">
+          <!-- <div class="price">{{ item.price | currency:'CZK':true }}</div> -->
+          <div padding>
+            <div class="price" ion-text color="danger" *ngIf="item.price_discount">{{ item.price_discount | currency:'CZK':true }}</div>
+            <div class="price" ion-text color="danger" *ngIf="!item.price_discount">{{ item.price | currency:'CZK':true }}</div>
+            <div class="origin-price text-decoration" ion-text color="gray" *ngIf="item.price_discount">{{ item.price | currency:'CZK':true }}</div>
+          </div>
         </div>
       </ion-col>
     </ion-row>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { CategoryService } from '../../services/category-service';
 import { FileService } from '../../services/file-service';
 import { ItemService } from '../../services/item-service';
@@ -8,14 +8,10 @@ import { CategoryPage } from "../category/category";
 import { ItemPage } from "../item/item";
 import { SearchPage } from "../search/search";
 import { CartPage } from "../cart/cart";
+import { MemoryService } from '../../services/memory-service';
+import { ModalService } from '../../services/modal-service';
+import { TranslateService } from 'ng2-translate';
 
-
-/*
- Generated class for the LoginPage page.
-
- See http://ionicframework.com/docs/v2/components/#navigation for more info on
- Ionic pages and navigation.
- */
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -24,9 +20,6 @@ export class HomePage {
   // list slides for slider
   public slides = [
     {
-      src: 'assets/img/slide_1.jpg'
-    },
-    {
       src: 'assets/img/slide_2.jpg'
     },
     {
@@ -34,21 +27,33 @@ export class HomePage {
     }
   ];
 
-  // list categories
   public categories: any[] = [];
-
-  // list of items
-  public items: any;
+  public items: any = [];
+  public title: string = this.translate.instant("title")
 
   constructor(public nav: NavController,
     public categoryService: CategoryService,
     public fileService: FileService,
+    private modalService: ModalService,
+    private translate: TranslateService,
+    private navParams: NavParams,
+    private memoryService: MemoryService,
     public itemService: ItemService) {
-    categoryService.getAll().then(categories => {
-      this.categories = categories;
-    });
+    if (this.navParams.data.id) {
+      this.memoryService.idParam = "test"//this.navParams.data.id;
+      this.title = this.navParams.data.id.toUpperCase();
+    }
 
-    this.items = itemService.getAll();
+    let promises = [];
+    promises.push(categoryService.getAll().then(categories => {
+      this.categories = categories;
+    }));
+
+    promises.push(itemService.getAll().then(items => {
+      this.items = items.filter(x => x.enable && x.enable_home);
+    }));
+
+    this.modalService.showWait(Promise.all(promises));
   }
 
   // view categories
@@ -57,13 +62,13 @@ export class HomePage {
   }
 
   // view a category
-  viewCategory(catId) {
-    this.nav.push(CategoryPage, { id: catId });
+  viewCategory(category) {
+    this.nav.push(CategoryPage, { category: category });
   }
 
   // view a item
-  viewItem(itemId) {
-    this.nav.push(ItemPage, { id: itemId })
+  viewItem(key) {
+    this.nav.push(ItemPage, { key: key })
   }
 
   // go to search page

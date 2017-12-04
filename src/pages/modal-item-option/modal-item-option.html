@@ -25,10 +25,8 @@
       <img src="{{ item.thumb }}">
     </ion-thumbnail>
     <div>
-      <h2 class="price" ion-text color="danger" margin-top *ngIf="item.sale_price">{{ item.sale_price + item.option_price |
-        currency:'USD':true }}</h2>
-      <h2 class="price" ion-text color="danger" margin-top *ngIf="!item.sale_price">{{ item.price + item.option_price |
-        currency:'USD':true }}</h2>
+      <h2 class="price" ion-text color="danger" margin-top *ngIf="item.sale_price">{{ item.sale_price + item.option_price | currency:'CZK':true }}</h2>
+      <h2 class="price" ion-text color="danger" margin-top *ngIf="!item.sale_price">{{ item.price + item.option_price | currency:'CZK':true }}</h2>
       <span ion-text color="gray">{{ item.selectedOptions }}</span>
     </div>
   </ion-item>
@@ -38,9 +36,7 @@
       {{ optionGroup.name }}
       <span padding-left>{{ optionGroup.currentOption ? optionGroup.currentOption.name : '' }}</span>
     </div>
-    <div class="item-option" *ngFor="let option of optionGroup.options"
-         (click)="chooseOption(optionGroup, option)"
-         [ngClass]="{'active': option.active}">
+    <div class="item-option" *ngFor="let option of optionGroup.options" (click)="chooseOption(optionGroup, option)" [ngClass]="{'active': option.active}">
       {{ option.name }}
     </div>
   </div>

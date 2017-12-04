@@ -2,16 +2,18 @@ import { Injectable } from '@angular/core';
 // import { User } from '../models/user';
 import { Headers, Http, RequestOptions } from '@angular/http';
 import { SigninService } from './signin-service';
+import { MemoryService } from "./memory-service";
 
 @Injectable()
 export class FileService {
 
-    // public url = "http://localhost:8082";
+    // public url = "http://localhost:8083";
     public url = "http://81.201.62.19:8083";
     public apiUrl: string = this.url + "/api/files/";
 
     constructor(
         private http: Http,
+        private memoryService: MemoryService,
         private signinService: SigninService
     ) {
     }
@@ -21,6 +23,9 @@ export class FileService {
             var headers = new Headers();
             if (this.signinService.user)
                 headers.append('x-access-token', this.signinService.user.token);
+            if (this.memoryService.idParam) {
+                headers.append('id-param', this.memoryService.idParam);
+            }
             var options = new RequestOptions({ headers: headers });
 
             this.http.get(this.apiUrl + key, options)

@@ -1,8 +1,8 @@
-import {Component} from '@angular/core';
-import {NavController} from 'ionic-angular';
+import { Component } from '@angular/core';
+import { NavController } from 'ionic-angular';
 
-import {CartService} from '../../services/cart-service';
-import {HomePage} from "../home/home";
+import { CartService } from '../../services/cart-service';
+import { HomePage } from "../home/home";
 
 /*
  Generated class for the LoginPage page.
@@ -20,7 +20,7 @@ export class OrderConfirmPage {
 
   constructor(public nav: NavController, public cartService: CartService) {
     // set cart data
-    this.cart = cartService.getAll();
+    // this.cart = cartService.getAll();
   }
 
   // place order

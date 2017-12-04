@@ -18,15 +18,17 @@ export class CategoriesPage {
   // list of categories
   public categories: any[];
 
-  constructor(public nav: NavController, public categoryService: CategoryService) {
+  constructor(public nav: NavController,
+    public categoryService: CategoryService
+  ) {
     categoryService.getAll().then(categories => {
       this.categories = categories;
     });
   }
 
   // view category
-  viewCategory(categoryId) {
-    this.nav.push(CategoryPage, { id: categoryId });
+  viewCategory(category) {
+    this.nav.push(CategoryPage, { category: category });
   }
 
   // view cart

@@ -103,4 +103,8 @@ export class Utils {
             change1[prop] = change2[prop];
         }
     }
+
+    public static createObjectFromType(type: any, data: any): any {
+        return Object.assign(new type(), data);
+    }
 }

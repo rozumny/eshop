@@ -28,11 +28,11 @@
       <div>
         <div text-wrap>{{ item.name }}</div>
         <div>
-          <span ion-text color="danger" *ngIf="item.sale_price">{{ item.sale_price | currency:'USD':true }}</span>
-          <span ion-text color="danger" *ngIf="!item.sale_price">{{ item.price | currency:'USD':true }}</span>
+          <span ion-text color="danger" *ngIf="item.sale_price">{{ item.sale_price | currency:'CZK':true }}</span>
+          <span ion-text color="danger" *ngIf="!item.sale_price">{{ item.price | currency:'CZK':true }}</span>
         </div>
         <div class="origin-price text-sm">
-          <span *ngIf="item.sale_price" class="text-decoration">{{ item.price | currency:'USD':true }}</span>
+          <span *ngIf="item.sale_price" class="text-decoration">{{ item.price | currency:'CZK':true }}</span>
           <span *ngIf="item.sale_price" class="discount-rate" ion-text color="danger">{{ discountPercent(item.price, item.sale_price) }}%</span>
         </div>
         <div class="bottom-info text-lg" padding-right>

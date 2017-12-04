@@ -1,37 +1,35 @@
-import {Injectable} from "@angular/core";
-import {ITEMS} from "./mock-items";
+import { Injectable } from "@angular/core";
+import { FileService } from "./file-service";
+import { Utils } from "./utils-service";
+import { Item } from "../models/item";
 
 @Injectable()
 export class ItemService {
   private items: any;
 
-  constructor() {
-    this.items = ITEMS;
+  constructor(private fileService: FileService) {
   }
 
   getAll() {
-    return this.items;
+    return this.fileService.get("products").then(result => {
+      this.items = Utils.objectToArrayStoreKeys(result);
+      return this.items.map(x => Utils.createObjectFromType(Item, x));
+    })
   }
 
-  getByCategory(catId) {
-    let items = [];
-
-    for (let i = 0; i < ITEMS.length; i++) {
-      if (ITEMS[i].category_id == catId) {
-        items.push(ITEMS[i]);
-      }
-    }
-
-    return items;
+  getByCategory(key: string): Promise<any> {
+    return this.fileService.get("products").then(result => {
+      this.items = Utils.objectToArrayStoreKeys(result);
+      this.items = this.items.filter(x => x.categories.indexOf(key) > -1);
+      return this.items.map(x => Utils.createObjectFromType(Item, x));
+    })
   }
 
-  getItem(id) {
-    for (var i = 0; i < this.items.length; i++) {
-      if (this.items[i].id === parseInt(id)) {
-        return this.items[i];
-      }
-    }
-    return null;
+  getItem(key: string): Promise<any> {
+    return this.fileService.get("products." + key).then(item => {
+      item.key = key;
+      return Utils.createObjectFromType(Item, item);
+    });
   }
 
   remove(item) {

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { BrowserModule } from '@angular/platform-browser';
@@ -16,6 +16,9 @@ import { OrderService } from '../services/order-service';
 import { NewsService } from '../services/news-service';
 import { FileService } from '../services/file-service';
 import { SigninService } from '../services/signin-service';
+import { LocalStorageService } from '../services/local-storage';
+import { ModalService } from '../services/modal-service';
+import { MemoryService } from '../services/memory-service';
 import { Utils } from '../services/utils-service';
 // end import services
 
@@ -50,7 +53,10 @@ import { TranslateLoader, TranslateModule } from 'ng2-translate/ng2-translate';
 import { StoreModule, combineReducers } from '@ngrx/store';
 import { compose } from '@ngrx/core/compose';
 import { localStorageSync } from 'ngrx-store-localstorage';
+
+//reducers
 import { user } from '../reducers/user';
+import { cart } from '../reducers/cart';
 
 export class myTranslationLoader implements TranslateLoader {
   public getTranslation(lang: string): Observable<any> {
@@ -94,14 +100,21 @@ export class myTranslationLoader implements TranslateLoader {
     HttpModule,
     IonicModule.forRoot(MyApp, {
       backButtonText: '',
-      backButtonIcon: 'ios-arrow-back-outline'
-    }),
+      locationStrategy: 'path'
+    },
+      {
+        links: [
+          { component: HomePage, name: 'Home' },
+          { component: HomePage, name: 'Home', segment: ':id' }
+        ]
+      }
+    ),
     TranslateModule.forRoot({ provide: TranslateLoader, useClass: myTranslationLoader }),
     StoreModule.provideStore(
       compose(
         localStorageSync(['user'], true),
         combineReducers
-      )({ user }))
+      )({ user, cart }))
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -130,6 +143,10 @@ export class myTranslationLoader implements TranslateLoader {
     WishListPage
   ],
   providers: [
+    {
+      provide: LOCALE_ID,
+      useValue: 'cs-CS'
+    },
     StatusBar,
     SplashScreen,
     CategoryService,
@@ -141,7 +158,10 @@ export class myTranslationLoader implements TranslateLoader {
     NewsService,
     FileService,
     SigninService,
-    Utils
+    ModalService,
+    MemoryService,
+    Utils,
+    LocalStorageService
     /* import services */
   ]
 })

@@ -11,7 +11,8 @@ export class CategoryService {
 
   getAll(): Promise<any[]> {
     return this.fileService.get("categories").then(result => {
-      return Utils.objectToArrayStoreKeys(result);
+      this.categories = Utils.objectToArrayStoreKeys(result);
+      return this.categories;
     })
   }
 

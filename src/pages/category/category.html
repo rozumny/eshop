@@ -10,7 +10,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>{{ category.name }}</ion-title>
+    <ion-title>{{ category.title }}</ion-title>
     <ion-buttons end>
       <button ion-button (click)="goToCart()">
         <ion-icon name="cart"></ion-icon>
@@ -34,31 +34,30 @@
   </div>
 
   <!--List of items-->
-  <ion-list no-margin class="list-full-border list-products"
-            [ngClass]="{'grid': viewType == 'grid', 'list': viewType == 'list'}">
-    <ion-item class="product" *ngFor="let item of items" (click)="viewItem(item.id)">
+  <ion-list no-margin class="list-full-border list-products" [ngClass]="{'grid': viewType == 'grid', 'list': viewType == 'list'}">
+    <ion-item class="product" *ngFor="let item of items" (click)="viewItem(item.key)">
       <ion-thumbnail item-left>
-        <img src="{{ item.thumb }}">
+        <img src="{{ fileService.url + '/' + item.filenames[0] }}">
       </ion-thumbnail>
       <!--item's information-->
       <div>
-        <div text-wrap>{{ item.name }}</div>
+        <div text-wrap>{{ item.title }}</div>
         <div>
-          <span ion-text color="danger" *ngIf="item.sale_price">{{ item.sale_price | currency:'USD':true }}</span>
-          <span ion-text color="danger" *ngIf="!item.sale_price">{{ item.price | currency:'USD':true }}</span>
+          <span ion-text color="danger" *ngIf="item.price_discount">{{ item.price_discount | currency:'CZK':true }}</span>
+          <span ion-text color="danger" *ngIf="!item.price_discount">{{ item.price | currency:'CZK':true }}</span>
         </div>
         <div class="origin-price text-sm">
-          <span *ngIf="item.sale_price" class="text-decoration">{{ item.price | currency:'USD':true }}</span>
-          <span *ngIf="item.sale_price" class="discount-rate" ion-text color="danger">{{ discountPercent(item.price, item.sale_price) }}%</span>
+          <span *ngIf="item.price_discount" class="text-decoration">{{ item.price | currency:'CZK':true }}</span>
+          <span *ngIf="item.price_discount" class="discount-rate" ion-text color="danger">{{ discountPercent(item.price, item.price_discount) }}%</span>
         </div>
-        <div class="bottom-info text-sm">
+        <!-- <div class="bottom-info text-sm">
           <span ion-text color="gray" class="pull-left" *ngIf="item.shipping == 0">Free shipping</span>
-          <span ion-text color="gray" class="pull-left" *ngIf="item.shipping != 0">Shipping: {{ item.shipping | currency:'USD':true}}</span>
+          <span ion-text color="gray" class="pull-left" *ngIf="item.shipping != 0">Shipping: {{ item.shipping | currency:'CZK':true}}</span>
           <span ion-text color="gray" class="pull-right">
             {{ item.num_orders }} Orders
           </span>
           <div class="clear"></div>
-        </div>
+        </div> -->
       </div>
     </ion-item>
   </ion-list>
@@ -66,17 +65,14 @@
 
 </ion-content>
 
-<!--Footer buttons-->
-<ion-footer class="category">
+<!-- <ion-footer class="category">
   <ion-toolbar position="bottom">
-    <!--filter button-->
     <ion-buttons text-center start>
       <button ion-button icon-left (click)="openFilter('filter')">
         <ion-icon name="ios-funnel"></ion-icon>
         FILTER
       </button>
     </ion-buttons>
-    <!--attribute button-->
     <ion-buttons text-center end>
       <button ion-button icon-left (click)="openFilter('attribute')">
         <ion-icon name="apps"></ion-icon>
@@ -84,4 +80,4 @@
       </button>
     </ion-buttons>
   </ion-toolbar>
-</ion-footer>
+</ion-footer> -->

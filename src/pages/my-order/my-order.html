@@ -10,7 +10,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>My Orders</ion-title>
+    <ion-title>Moje objednávky</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -19,8 +19,8 @@
 <ion-content padding class="my-order common-bg">
   <div class="card light-bg" margin-top *ngFor="let order of orders; let orderIndex = index">
     <div class="card-header" padding>
-      <div>Order Id: {{ order.transaction_id }}</div>
-      <div>Order Time: {{ order.created_at }}</div>
+      <div>Číslo objednávky: {{ order.transaction_id }}</div>
+      <div>Datum: {{ order.created_at }}</div>
     </div>
 
     <ion-list class="list-full-border" no-margin>
@@ -32,7 +32,7 @@
         <div>
           <div text-wrap>{{ item.name }}</div>
           <div padding-bottom>
-            <span class="pull-right">{{ item.price | currency:'USD':true }} x {{ item.quantity }}</span>
+            <span class="pull-right">{{ item.price | currency:'CZK':true }} x {{ item.quantity }}</span>
             <div class="clear"></div>
           </div>
         </div>
@@ -41,8 +41,8 @@
 
     <div class="card-footer" padding>
       <div>
-        <span class="pull-left" ion-text color="gray">Total</span>
-        <span class="pull-right bold" ion-text color="danger">{{ order.total | currency:'USD':true }}</span>
+        <span class="pull-left" ion-text color="gray">Celkem</span>
+        <span class="pull-right bold" ion-text color="danger">{{ order.total | currency:'CZK':true }}</span>
         <div class="clear"></div>
       </div>
     </div>

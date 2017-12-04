@@ -1,11 +1,13 @@
+page-item {
+  img {
+    height: 350px !important;
+  }
+}
+
 page-item,
 .item {
   ion-slides {
-    height: auto;
-
-    img {
-      float: left;
-    }
+    height: 350px;
   }
 
   .btn-wish-list {

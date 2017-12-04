@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar color="primary">
-    <ion-title>Login</ion-title>
+    <ion-title>Přihlásit se</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -20,26 +20,27 @@
     </ion-item>
 
     <ion-item>
-      <ion-input type="password" placeholder="Password"></ion-input>
+      <ion-input type="password" placeholder="Heslo"></ion-input>
     </ion-item>
 
   </ion-list>
 
-  <button ion-button color="primary" block (click)="login()">LOGIN</button>
+  <button ion-button color="primary" block (click)="login()">Přihlásit se</button>
 
-  <div text-right margin-top margin-bottom (click)="forgotPwd()">Forgot password?</div>
+  <div text-right margin-top margin-bottom (click)="forgotPwd()">Zapomenuté heslo?</div>
 
-  <button ion-button icon-left block color="facebook" class="align-left">
+  <!-- <button ion-button icon-left block color="facebook" class="align-left">
     <ion-icon name="logo-facebook"></ion-icon>
     Signin with Facebook
-  </button>
+  </button> -->
 
-  <button ion-button icon-left block color="light" margin-top class="align-left card">
+  <!-- <button ion-button icon-left block color="light" margin-top class="align-left card">
     <ion-icon name="logo-google"></ion-icon>
     <span>Signin with Google</span>
-  </button>
+  </button> -->
 
   <div class="align-bottom" padding text-center>
-    No Account? <span class="bold" (click)="register()">Register</span>
+    Nemáte účet?
+    <span class="bold" (click)="register()">Zaregistrovat se</span>
   </div>
 </ion-content>

@@ -10,7 +10,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Categories</ion-title>
+    <ion-title>{{'categories_title' | translate}}</ion-title>
     <ion-buttons end>
       <button ion-button (click)="goToCart()">
         <ion-icon name="cart"></ion-icon>
@@ -20,10 +20,10 @@
 </ion-header>
 
 
-<ion-content padding class="categories">
-  <ion-list class="list-no-border">
-    <ion-item *ngFor="let category of categories" (click)="viewCategory(category.id)">
-      {{ category.name }} ({{ category.item_count }})
+<ion-content class="categories">
+  <ion-list>
+    <ion-item *ngFor="let category of categories" (click)="viewCategory(category)">
+      {{ category.title }}
     </ion-item>
   </ion-list>
 </ion-content>
