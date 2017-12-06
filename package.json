@@ -27,7 +27,12 @@
     "@ionic-native/splash-screen": "4.3.2",
     "@ionic-native/status-bar": "4.3.2",
     "@ionic/storage": "2.0.1",
+    "angular2-uuid": "1.1.1",
+    "@ngrx/core": "1.2.0",
+    "@ngrx/store": "2.2.1",
+    "ng2-translate": "5.0.0",
     "@ngx-translate/core": "8.0.0",
+    "ngrx-store-localstorage": "0.1.5",
     "@ngx-translate/http-loader": "^2.0.0",
     "autoprefixer": "^7.1.6",
     "cordova-android": "^6.3.0",
@@ -44,6 +49,7 @@
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.0.1",
+    "ionic": "3.19.0",
     "typescript": "2.3.4"
   },
   "description": "ionic2_ecommerce: An Ionic project",

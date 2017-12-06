@@ -32,6 +32,9 @@ export class CartPage {
   }
 
   addQuantity(item) {
+    if (item.quantity >= item.item.amount) {
+      this.modalService.createToast("cart_order_amount_message").present();
+    }
     this.cartService.add(item.item);
   }
 
@@ -46,6 +49,7 @@ export class CartPage {
         if (result.success) {
           return this.cartService.order(this.cart).then(result => {
             this.modalService.createToast("cart_order_message").present();
+            this.cartService.clear();
             this.nav.setRoot(HomePage)
           });
         } else {

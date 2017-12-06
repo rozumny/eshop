@@ -27,6 +27,10 @@ export var APP_TRANSLATIONS: { [key: string]: { [key: string]: string } } = {
         en: '',
         cz: 'Koupit'
     },
+    item_amount: {
+        en: '',
+        cz: 'Počet kusů'
+    },
     cart_title: {
         en: '',
         cz: 'Košík'
@@ -51,8 +55,12 @@ export var APP_TRANSLATIONS: { [key: string]: { [key: string]: string } } = {
         en: '',
         cz: 'Objednávka odeslána'
     },
+    cart_no_products: {
+        en: '',
+        cz: 'Žádné položky'
+    },
     cart_order_amount_message: {
         en: '',
-        cz: 'Nedostatek zboží na skladě: '
+        cz: 'Nedostatek zboží na skladě'
     }
 };

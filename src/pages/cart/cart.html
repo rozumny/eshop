@@ -10,7 +10,7 @@
 
 <ion-content class=" common-bg">
   <!--Choose shipping location-->
-  <div class="card">
+  <!-- <div class="card">
     <ion-item class="no-border">
       <ion-label>Adresa</ion-label>
       <ion-select>
@@ -18,14 +18,17 @@
         <ion-option value="vn">Praha</ion-option>
       </ion-select>
     </ion-item>
-  </div>
+  </div> -->
 
   <div class="card">
     <!-- <div class="card-header" padding>
       Seller: {{ seller.name }}
     </div> -->
 
-    <ion-list class="list-full-border" no-margin>
+    <ion-item *ngIf="cart && cart.items && cart.items.length === 0">
+      {{'cart_no_products' | translate }}
+    </ion-item>
+    <ion-list *ngIf="cart && cart.items && cart.items.length > 0" class="list-full-border" no-margin>
       <ion-list-header>{{'cart_products' | translate }}</ion-list-header>
       <ion-item class="product" *ngFor="let cartitem of cart.items">
         <ion-thumbnail item-left *ngIf="cartitem.item.filenames && cartitem.item.filenames.length > 0">
@@ -64,7 +67,7 @@
       </ion-item>
     </ion-list>
 
-    <div class="card-footer" padding>
+    <div *ngIf="cart && cart.items && cart.items.length > 0" class="card-footer" padding>
       <div>
         <span class="pull-left" ion-text color="gray">{{'cart_products' | translate }}</span>
         <span class="pull-right" ion-text color="gray">{{ cart.getSubtotal() | currency:'CZK':true }}</span>

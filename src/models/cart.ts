@@ -1,8 +1,11 @@
 import { Item } from "./item"
 
 export class Cart {
+    public date: Date;
+    public state: number;
     public items: CartItem[] = [];
 
+    // postage
     // public billingdate: string;
     // public billingammount: number;
     // public name: string;
@@ -50,7 +53,7 @@ export class Cart {
     public getSubtotal(): number {
         let subtotal = 0;
         this.items.forEach(x => {
-            subtotal += x.quantity * x.item.getPrice();
+            subtotal += (x.quantity * x.item.getPrice()) + (x.item.price_postage ? parseInt(x.item.price_postage) : 0);
         });
         return subtotal;
     }

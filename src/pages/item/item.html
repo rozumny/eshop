@@ -37,9 +37,10 @@
       <h1 class="price" ion-text color="danger" margin-top *ngIf="item.price_discount">{{ item.price_discount | currency:'CZK':true }}</h1>
       <h1 class="price" ion-text color="danger" margin-top *ngIf="!item.price_discount">{{ item.price | currency:'CZK':true }}</h1>
       <h2 class="origin-price text-decoration" ion-text color="gray" margin-top *ngIf="item.price_discount">{{ item.price | currency:'CZK':true }}</h2>
+      <p *ngIf="item.amount !== undefined">{{"item_amount" | translate}}: {{ item.amount }}</p>
     </div>
 
-    <ion-grid>
+    <ion-grid *ngIf="item.amount !== undefined && item.amount > 0">
       <ion-row>
         <ion-col>
           <button ion-button block class="btn-add-cart" (click)="addToCart(item)">{{'item_add_to_cart' | translate}}</button>
