@@ -1,0 +1,10 @@
+<!--<ion-item>{{control.config.label}}</ion-item>-->
+<ion-item *ngIf="!control.config.hide" [class.error]="!control.abstractControl.valid && control.abstractControl.touched">
+    <ion-range (change)='onChange()' dualKnobs="true" [min]="control.config.min" [max]="control.config.max" [(ngModel)]='control.dataObject[control.dataField]'
+        [formControl]="control.abstractControl">
+        <ion-label range-left>{{ (control.dataObject[control.dataField].lower == control.config.min || control.dataObject[control.dataField].lower
+            == control.config.max) ? '-∞' : control.dataObject[control.dataField].lower}}</ion-label>
+        <ion-label range-right>{{ (control.dataObject[control.dataField].upper == control.config.max || control.dataObject[control.dataField].upper
+            == control.config.min) ? '+∞' : control.dataObject[control.dataField].upper}}</ion-label>
+    </ion-range>
+</ion-item>

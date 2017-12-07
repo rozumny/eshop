@@ -1,0 +1,7 @@
+<ion-item *ngIf="control.config.lang && !control.config.hide">
+    <ion-label stacked>{{control.config.lang.substring(0,2)}} {{control.config.label | translate }}</ion-label>
+    <ion-input (change)='onChange()' *ngIf="!control.config.input" type="text" [(ngModel)]="control.dataObject[control.dataField][control.config.lang]"
+        [formControl]="control.abstractControl"></ion-input>
+    <ion-textarea (change)='onChange()' *ngIf="control.config.input" rows=4 type="text" [(ngModel)]="control.dataObject[control.dataField][control.config.lang]"
+        [formControl]="control.abstractControl"></ion-textarea>
+</ion-item>

@@ -1,0 +1,9 @@
+<ion-item *ngIf="!control.config.hide">
+    <ion-label>
+        {{ control.config.label | translate }}
+    </ion-label>
+    <input (change)='onChange()' item-right *ngIf="form.subIndex != undefined" type="color" [(ngModel)]='form.data[form.subIndex][control.config.name]'
+        [formControl]="control.abstractControl" />
+    <input (change)='onChange()' item-right *ngIf="form.subIndex == undefined" type="color" [(ngModel)]='form.data[control.config.name]'
+        [formControl]="control.abstractControl" />
+</ion-item>

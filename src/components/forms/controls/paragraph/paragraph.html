@@ -1,0 +1,9 @@
+<br *ngIf="control.config.linebreak && !control.config.hide" />
+<ion-item text-wrap *ngIf="!control.config.hide && !control.config.isHeader">
+    <span *ngIf="control.config.required == 'true'" class="red">* </span>
+    <span [class.fontNormal]="'true'" [class.header]="control.config.isHeader" [class.hint]="control.config.isHint" [innerHTML]="content | safeHtml"></span>
+</ion-item>
+<ion-item no-lines text-wrap *ngIf="!control.config.hide && control.config.isHeader">
+    <span *ngIf="control.config.required == 'true'" class="red">* </span>
+    <span [class.fontNormal]="'true'" [class.header]="control.config.isHeader" [class.hint]="control.config.isHint" [innerHTML]="content | safeHtml"></span>
+</ion-item>

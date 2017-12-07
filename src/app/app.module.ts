@@ -6,6 +6,28 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpModule } from '@angular/http';
 
+//pipe
+import { SafeHtmlPipe } from '../pipes/safe-html-pipe';
+
+// import components
+import { NewForms } from '../components/forms/newForms';
+import { Text } from '../components/forms/controls/text/text';
+import { Header } from '../components/forms/controls/header/header';
+import { Linebreak } from '../components/forms/controls/linebreak/linebreak';
+import { TextArea } from '../components/forms/controls/textarea/textarea';
+import { Paragraph } from '../components/forms/controls/paragraph/paragraph';
+import { Color } from '../components/forms/controls/color/color';
+import { DateControl } from '../components/forms/controls/date/date';
+import { FormButton } from '../components/forms/controls/formbutton/formbutton';
+import { Checkbox } from '../components/forms/controls/checkbox/checkbox';
+import { LocalizedText } from '../components/forms/controls/localizedtext/localizedtext';
+import { MultiSelectControl } from '../components/forms/controls/multiselectcontrol/multiselectcontrol';
+import { MultiCheckboxControl } from '../components/forms/controls/multicheckboxcontrol/multicheckboxcontrol';
+import { RadioControl } from '../components/forms/controls/radio/radio';
+import { Number } from '../components/forms/controls/number/number';
+import { Password } from '../components/forms/controls/password/password';
+import { Range } from '../components/forms/controls/range/range';
+
 // import services
 import { CategoryService } from '../services/category-service';
 import { ItemService } from '../services/item-service';
@@ -20,6 +42,8 @@ import { LocalStorageService } from '../services/local-storage';
 import { ModalService } from '../services/modal-service';
 import { MemoryService } from '../services/memory-service';
 import { Utils } from '../services/utils-service';
+import { FormService } from '../services/form-service';
+import { FormsService } from '../services/forms-service';
 // end import services
 
 // import pages
@@ -93,7 +117,29 @@ export class myTranslationLoader implements TranslateLoader {
     TabAttributePage,
     TabFilterPage,
     WelcomePage,
-    WishListPage
+    WishListPage,
+
+    // pipes
+    SafeHtmlPipe,
+
+    // components
+    NewForms,
+    Paragraph,
+    Text,
+    Header,
+    Linebreak,
+    TextArea,
+    FormButton,
+    Checkbox,
+    LocalizedText,
+    MultiSelectControl,
+    MultiCheckboxControl,
+    RadioControl,
+    Number,
+    Color,
+    DateControl,
+    Password,
+    Range
   ],
   imports: [
     BrowserModule,
@@ -140,7 +186,26 @@ export class myTranslationLoader implements TranslateLoader {
     TabAttributePage,
     TabFilterPage,
     WelcomePage,
-    WishListPage
+    WishListPage,
+
+    // components
+    NewForms,
+    Paragraph,
+    Text,
+    Header,
+    Linebreak,
+    TextArea,
+    FormButton,
+    Checkbox,
+    LocalizedText,
+    MultiSelectControl,
+    MultiCheckboxControl,
+    RadioControl,
+    Number,
+    Color,
+    DateControl,
+    Password,
+    Range
   ],
   providers: [
     {
@@ -161,7 +226,9 @@ export class myTranslationLoader implements TranslateLoader {
     ModalService,
     MemoryService,
     Utils,
-    LocalStorageService
+    LocalStorageService,
+    FormService,
+    FormsService
     /* import services */
   ]
 })

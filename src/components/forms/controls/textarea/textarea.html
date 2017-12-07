@@ -1,0 +1,9 @@
+<ion-item [ngClass]="control.config.class" *ngIf="!control.config.hide" [class.error]="!control.abstractControl.valid && control.abstractControl.touched">
+    <ion-label stacked>
+        <span *ngIf="control.config.required" class="red">*</span> {{ control.config.translatedLabel ? control.config.translatedLabel : control.config.label | translate }}
+        <div *ngIf="control.config.description" class="input-desc">{{control.config.description}}</div>
+    </ion-label>
+    <ion-textarea #mytextarea row="2" (ngModel)='control.dataObject[control.dataField]' (input)='onChange($event)' [formControl]="control.abstractControl">
+    </ion-textarea>
+</ion-item>
+<div *ngIf="control.abstractControl.hasError('required') && control.abstractControl.touched" class="error-box">* {{ control.config.label | translate }} {{ 'form_label_field_required' | translate}}</div>

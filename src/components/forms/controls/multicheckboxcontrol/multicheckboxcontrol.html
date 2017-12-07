@@ -1,0 +1,6 @@
+<div *ngIf="!control.config.hide">
+    <ion-item *ngFor="let o of options">
+        <ion-label>{{o.label}}</ion-label>
+        <ion-checkbox checked="{{getChecked(o.value)}}" item-right (click)="onChange(o.value)"></ion-checkbox>
+    </ion-item>
+</div>

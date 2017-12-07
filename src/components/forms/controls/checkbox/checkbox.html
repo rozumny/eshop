@@ -1,0 +1,8 @@
+<ion-item *ngIf="control.dataObject && control.dataField && !control.config.hide" [class.error]="!control.abstractControl.valid && control.abstractControl.touched">
+    <ion-label>{{ control.config.translatedLabel ? control.config.translatedLabel : (control.config.label | translate) }}
+      <div *ngIf="control.config.description" class="input-desc">{{control.config.description}}</div>
+
+    </ion-label>
+
+    <ion-toggle [(ngModel)]="control.dataObject[control.dataField]" [formControl]="control.abstractControl" (ionChange)="onchange()"></ion-toggle>
+</ion-item>

@@ -1,0 +1,6 @@
+<ion-list-header class="dark mm-list-header" *ngIf="!control.config.hide">
+    <ion-label>
+        {{control.config.translatedLabel ? control.config.translatedLabel : control.config.label | translate }}
+        <ion-badge color="darkred">{{control.config.items?.length }}</ion-badge>
+    </ion-label>
+</ion-list-header>

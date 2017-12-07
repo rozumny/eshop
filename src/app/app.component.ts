@@ -26,6 +26,8 @@ import { LocalStorageService } from '../services/local-storage';
   }
 })
 export class MyApp {
+  public user: any = null;
+
   public rootPage: any;
   public nav: any;
   public pages = [
@@ -76,14 +78,7 @@ export class MyApp {
     //   icon: 'ios-settings-outline',
     //   count: 0,
     //   component: SettingsPage
-    // },
-
-    {
-      title: 'Odhlásit se',
-      icon: 'log-out',
-      count: 0,
-      component: LoginPage
-    },
+    // }
     // import menu
   ];
 
@@ -115,6 +110,18 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
+  }
+
+  login() {
+    return;
+  }
+
+  logout() {
+    return;
+  }
+
+  register() {
+    return;
   }
 }
 

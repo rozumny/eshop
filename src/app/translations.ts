@@ -62,5 +62,33 @@ export var APP_TRANSLATIONS: { [key: string]: { [key: string]: string } } = {
     cart_order_amount_message: {
         en: '',
         cz: 'Nedostatek zboží na skladě'
-    }
+    },
+    cart_empty_message: {
+        en: '',
+        cz: 'V košíku nejsou žádné položky'
+    },
+    cart_user: {
+        en: '',
+        cz: 'Uživatel'
+    },
+    register: {
+        en: "",
+        cz: "Nemáte účet?"
+    },
+    no_register: {
+        en: "",
+        cz: "Pokračovat bez registrace"
+    },
+    register_button: {
+        en: "",
+        cz: "Zaregistrovat se"
+    },
+    logout: {
+        en: "",
+        cz: "Odhlásit se"
+    },
+    login: {
+        en: "",
+        cz: "Přihlásit se"
+    },
 };

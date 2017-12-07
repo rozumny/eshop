@@ -1,0 +1,12 @@
+<ion-item *ngIf="!control.config.hide" [class.error]="!control.abstractControl.valid && control.abstractControl.touched">
+    <ion-icon name="calendar" item-start></ion-icon>
+    <ion-label stacked>
+        <span *ngIf="control.config.required" class="red">*</span> {{ control.config.translatedLabel ? control.config.translatedLabel : control.config.label | translate }}
+        <div *ngIf="control.config.description" class="input-desc">{{control.config.description}}</div>
+        <div *ngIf="control.abstractControl.hasError('required') && control.abstractControl.touched" class="error-box">{{ 'form_label_field_required' | translate }}</div>
+    </ion-label>
+    <ion-datetime *ngIf="type == 'date'" max="2050-10-31" displayFormat="DD/MMM/YYYY" (ionChange)='onChange()' displayFormat="{{formats.dateFormat}}"
+        [(ngModel)]='control.dataObject[control.dataField]' [formControl]="control.abstractControl"></ion-datetime>
+    <ion-datetime *ngIf="type == 'time'" displayFormat="HH:mm" (ionChange)='onChange()' [(ngModel)]='control.dataObject[control.dataField]'
+        [formControl]="control.abstractControl"></ion-datetime>
+</ion-item>

@@ -34,6 +34,13 @@ $colors: (
   orange: #F44336
 );
 
+$primary: color($colors, primary);
+$font-size-extra-large: 24px;
+$font-size-large: 20px;
+$font-size-normal: 16px;
+$font-size-small: 14px;
+$font-size-extra-small: 10px;
+
 // App Theme
 // --------------------------------------------------
 // Ionic apps can have different themes applied, which can

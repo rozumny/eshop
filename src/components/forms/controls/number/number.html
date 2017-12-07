@@ -1,0 +1,15 @@
+<ion-item *ngIf="!control.config.hide" [class.error]="!control.abstractControl.valid && control.abstractControl.touched">
+    <ion-label stacked>
+      <span *ngIf="control.config.required" class="red">*</span> {{ control.config.translatedLabel ? control.config.translatedLabel
+      : control.config.label | translate }}
+      <div *ngIf="control.config.description" class="input-desc">{{control.config.description}}</div>
+      <div *ngIf="control.abstractControl.hasError('required') && control.abstractControl.touched" class="error-box">{{ 'form_label_field_required' | translate }}</div>
+      <div *ngIf="control.abstractControl.hasError('minlength') && control.abstractControl.touched" class="error-box">* Minimum {{ control.config.label | translate }} length is {{control.config.min}}!</div>
+    </ion-label>
+    <ion-input (change)='onChange()' *ngIf="!control.config.focusout" type="number" [(ngModel)]='control.dataObject[control.dataField]'
+        (focusout)="focusOutFunction()" [formControl]="control.abstractControl"></ion-input>
+    <ion-input (change)='onChange()' *ngIf="control.config.focusout" type="number" [(ngModel)]='control.dataObject[control.dataField]'
+        (focusout)="focusOutFunction()"></ion-input>
+</ion-item>
+
+

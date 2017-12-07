@@ -12,6 +12,7 @@ import { CartService } from '../../services/cart-service';
   templateUrl: 'cart.html'
 })
 export class CartPage {
+  public user: any = null;
   public cart: Cart;
   public total: number;
 
@@ -44,6 +45,11 @@ export class CartPage {
 
   // place order
   buy() {
+    if (!this.cart.items.find(x => x.quantity > 0)) {
+      this.modalService.createToast("cart_empty_message").present();
+      return;
+    }
+
     this.modalService.showWait(
       this.cartService.checkOrder(this.cart).then(result => {
         if (result.success) {
@@ -56,5 +62,17 @@ export class CartPage {
           return this.modalService.createToast("cart_order_amount_message").present();
         }
       }));
+  }
+
+  register() {
+    return;
+  }
+
+  noregister() {
+    this.user = {};
+  }
+
+  signin() {
+    return;
   }
 }

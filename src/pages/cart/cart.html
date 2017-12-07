@@ -21,15 +21,11 @@
   </div> -->
 
   <div class="card">
-    <!-- <div class="card-header" padding>
-      Seller: {{ seller.name }}
-    </div> -->
-
-    <ion-item *ngIf="cart && cart.items && cart.items.length === 0">
-      {{'cart_no_products' | translate }}
-    </ion-item>
-    <ion-list *ngIf="cart && cart.items && cart.items.length > 0" class="list-full-border" no-margin>
+    <ion-list class="list-full-border" no-margin>
       <ion-list-header>{{'cart_products' | translate }}</ion-list-header>
+      <ion-item *ngIf="cart && cart.items && cart.items.length === 0">
+        {{'cart_no_products' | translate }}
+      </ion-item>
       <ion-item class="product" *ngFor="let cartitem of cart.items">
         <ion-thumbnail item-left *ngIf="cartitem.item.filenames && cartitem.item.filenames.length > 0">
           <img src="{{ fileService.url + '/' + cartitem.item.filenames[0] }}">
@@ -80,26 +76,33 @@
       </div>
     </div>
   </div>
+  <br/>
+  <div class="card">
+    <ion-list class="list-full-border" no-margin>
+      <ion-list-header>{{'cart_user' | translate }}</ion-list-header>
+    </ion-list>
 
-  <!--Total price-->
-  <!-- <div class="card" margin-top>
-    <div class="card-footer" padding>
-      <div>
-        <span class="pull-left" ion-text color="gray">Subtotal</span>
-        <span class="pull-right" ion-text color="gray">{{ cart.subtotal | currency:'CZK':true }}</span>
-        <div class="clear"></div>
-      </div>
-      <div>
-        <span class="pull-left" ion-text color="gray">Shipping</span>
-        <span class="pull-right" ion-text color="gray">{{ cart.shipping | currency:'CZK':true }}</span>
-        <div class="clear"></div>
+    <div padding>
+      <ion-row>
+        <button color="favorite" *ngIf="!user" ion-button (click)="login()">
+          {{ 'login' | translate }}
+        </button>
+      </ion-row>
+      <ion-row>
+        <button color="light" *ngIf="!user" ion-button (click)="noregister()">
+          {{ 'no_register' | translate }}
+        </button>
+      </ion-row>
+
+      <div class="align-bottom" padding text-center>
+        {{'register' | translate}}
+        <span class="bold" (click)="register()">{{'register_button' | translate}}</span>
       </div>
     </div>
-  </div> -->
-
+  </div>
 </ion-content>
 
-<ion-footer class="cart-footer" padding>
+<ion-footer *ngIf="user" class="cart-footer" padding>
   <ion-title>
     <span ion-text color="gray">{{'cart_total' | translate}}</span>
     <br/>

@@ -20,9 +20,22 @@
         {{ page.title }}
         <ion-badge color="danger" item-right *ngIf="page.count">{{ page.count }}</ion-badge>
       </button>
+      <button *ngIf="user" ion-item menuClose (click)="logout()">
+        <ion-icon item-left name="log-out"></ion-icon>
+        {{ 'logout' | translate }}
+      </button>
+      <button *ngIf="!user" ion-item menuClose (click)="login()">
+        <ion-icon item-left name="log-in"></ion-icon>
+        {{ 'login' | translate }}
+      </button>
     </ion-list>
   </ion-content>
-
+  <ion-footer *ngIf="!user">
+    <div class="align-bottom" padding text-center>
+      {{'register' | translate}}
+      <span class="bold" (click)="register()">{{'register_button' | translate}}</span>
+    </div>
+  </ion-footer>
 </ion-menu>
 
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

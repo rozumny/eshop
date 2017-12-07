@@ -1,0 +1,6 @@
+<ion-item *ngIf="!control.config.hide">
+    <ion-label [class]="control.config.isHeader ? 'header': ''">{{ control.config.translatedLabel ? control.config.translatedLabel : (control.config.label | translate) }}</ion-label>
+    <ion-select (ionChange)="onChange($event)" [(ngModel)]='control.dataObject[control.dataField]' [multiple]="isMultiple" [formControl]="control.abstractControl">
+        <ion-option [value]="o.value" *ngFor="let o of options">{{o.label}}</ion-option>
+    </ion-select>
+</ion-item>

@@ -1,0 +1,27 @@
+<div class="newforms" *ngIf="form">
+    <form (ngSubmit)="onSubmit(form)">
+        <span *ngFor="let control of form.controls">
+            <span [ngSwitch]="control.config.type">
+                <paragraph *ngSwitchCase="'paragraph'" [control]="control" [form]="form"></paragraph>
+                <text *ngSwitchCase="'text'" [control]="control" [form]="form"></text>
+                <header *ngSwitchCase="'header'" [control]="control" [form]="form"></header>
+                <textareacontrol *ngSwitchCase="'textarea'" [control]="control" [form]="form"></textareacontrol>
+                <password *ngSwitchCase="'password'" [control]="control" [form]="form"></password>
+                <number *ngSwitchCase="'number'" [control]="control" [form]="form"></number>
+                <checkbox *ngSwitchCase="'checkbox'" [control]="control" [form]="form"></checkbox>
+                <color *ngSwitchCase="'color'" [control]="control" [form]="form"></color>
+                <date *ngSwitchCase="'date'" [control]="control" [form]="form" [type]="'date'"></date>
+                <date *ngSwitchCase="'time'" [control]="control" [form]="form" [type]="'time'"></date>
+                <localizedtext *ngSwitchCase="'localizedtext'" [control]="control" [form]="form"></localizedtext>
+                <formbutton *ngSwitchCase="'button'" [control]="control" [form]="form"></formbutton>
+                <multiselectcontrol *ngSwitchCase="'combobox'" [control]="control" [form]="form"></multiselectcontrol>
+                <multiselectcontrol *ngSwitchCase="'multiValueCombobox'" [isMultiple]="'true'" [control]="control" [form]="form"></multiselectcontrol>
+                <multicheckboxcontrol *ngSwitchCase="'multiCheckbox'" [control]="control" [form]="form"></multicheckboxcontrol>
+                <radio *ngSwitchCase="'radio'" [control]="control" [form]="form"></radio>
+                <range *ngSwitchCase="'range'" [control]="control" [form]="form"></range>
+                <linebreak *ngSwitchCase="'linebreak'" [control]="control" [form]="form"></linebreak>
+                <div *ngSwitchDefault>NOT IMPLEMENTED {{control.config.type}}</div>
+            </span>
+        </span>
+    </form>
+</div>

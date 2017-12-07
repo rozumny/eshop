@@ -1,0 +1,17 @@
+paragraph {
+    .header {
+        font-weight: bold;
+        font-size: 18px;
+        // color: $primary;
+    }
+
+    .hint {
+        font-style: italic;
+        font-size: 14px !important;
+        color: #999;
+    }
+
+    .fontNormal {
+        font-size: $font-size-normal
+    }
+}
