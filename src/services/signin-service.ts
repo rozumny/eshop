@@ -3,6 +3,7 @@ import { User } from '../models/user';
 import { Headers, Http, RequestOptions } from '@angular/http';
 import { Store } from '@ngrx/store';
 import { SETUSER } from '../reducers/user';
+import { Utils } from '../services/utils-service';
 
 @Injectable()
 export class SigninService {
@@ -41,19 +42,15 @@ export class SigninService {
         });
     }
 
-    register(username: string, password: string, passwordRepeat: string, email: string): Promise<User> {
+    register(data: User): Promise<User> {
         return new Promise<User>((resolve, reject) => {
-            var user = new User();
-            user.username = username;
-            user.password = password;
-            user.email = email;
+            let user = Utils.createObjectFromType(User, data);
+            delete user["password_repeat"];
+            delete user["submit"];
 
-            var headers = new Headers();
-            headers.append('x-access-token', this.user.token);
-            var options = new RequestOptions({ headers: headers });
-
-            this.http.post(this.apiUrl, user, options)
+            this.http.post(this.apiUrl, user)
                 .subscribe(response => {
+                    this.store.dispatch({ type: SETUSER, payload: response.json() });
                     resolve(response.json());
                 }, error => {
                     reject(error);

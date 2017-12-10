@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { Events } from 'ionic-angular';
-import { TranslateService } from 'ng2-translate';
 import { Control } from '../../../../models/control';
 import { Form } from '../../../../models/form';
 
@@ -14,8 +13,7 @@ export class Email {
     public show: boolean = true;
 
     constructor(
-        private events: Events,
-        private translate: TranslateService
+        private events: Events
     ) {
     }
 

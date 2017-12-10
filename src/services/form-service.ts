@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
-import { Utils } from './utils-service';
-
 @Injectable()
 export class FormService {
 

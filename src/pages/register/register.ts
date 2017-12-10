@@ -55,13 +55,13 @@ export class RegisterPage {
         },
         {
           type: 'text',
-          label: 'city',
-          name: 'city'
+          label: 'address',
+          name: 'address'
         },
         {
           type: 'text',
-          label: 'address',
-          name: 'address'
+          label: 'city',
+          name: 'city'
         },
         {
           type: 'text',
@@ -85,6 +85,16 @@ export class RegisterPage {
     this.model = this.formsService.getNewFormModel(formDefinition, true, this.data);
   }
 
+  ionViewWillEnter() {
+    this.events.subscribe("register", () => {
+      this.register();
+    });
+  }
+
+  ionViewWillLeave() {
+    this.events.unsubscribe("register");
+  }
+
   // go to login page
   login() {
     this.navCtrl.push(LoginPage);
@@ -92,14 +102,20 @@ export class RegisterPage {
 
   // go to home page
   register() {
-    this.model.then(data => {
-      if (data.authForm.valid) {
-        this.modalService.showWait(this.signinService.register(this.data.username, this.data.password, this.data.password_repeat, this.data.email)).then((user) => {
-          this.navCtrl.setRoot(HomePage);
-        },
+    this.model.then(form => {
+      if (form.authForm.valid && this.data.password == this.data.password_repeat) {
+        this.modalService.showWait(this.signinService.register(this.data))
+          .then((user) => {
+            this.navCtrl.setRoot(HomePage).then(() => {
+              this.modalService.createToast('signin_registration_success').present();
+            });
+          },
           () => {
-            this.modalService.createToast('signin_auth_failed').present();
+            this.modalService.createToast('signin_registration_failed').present();
           });
+      }
+      else if (this.data.password !== this.data.password_repeat) {
+        this.modalService.createToast('signin_password_notmatch').present();
       }
     });
   }

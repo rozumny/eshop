@@ -9,8 +9,7 @@
 
 <ion-content padding class="register">
   <newforms [form]="model | async"></newforms>
-
-  <div class="align-bottom" padding text-center>
+  <div padding text-center>
     {{'login_text' | translate}}
     <span class="bold" (click)="login()">{{'login' | translate}}</span>
   </div>

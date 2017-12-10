@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, Content } from 'ionic-angular';
 // import { OrderConfirmPage } from "../order-confirm/order-confirm";
 import { HomePage } from '../home/home';
 import { LoginPage } from '../login/login';
@@ -20,6 +20,7 @@ import { Utils } from '../../services/utils-service';
   templateUrl: 'cart.html'
 })
 export class CartPage {
+  @ViewChild(Content) content: Content;
   private modelBillingAddress: Promise<Form>;
   private modelMailingAddress: Promise<Form>;
   private dataBillingAddress: any = {};
@@ -102,12 +103,14 @@ export class CartPage {
     });
 
     this.store.select('user').subscribe(() => {
-      this.user = this.signinService.user;
-      this.dataBillingAddress = this.cloneAddress(this.user);
-      this.dataBillingAddress.sameBillingAndMailingAddress = true;
-      this.dataMailingAddress = this.cloneAddress(this.user);
-      this.modelBillingAddress = this.formsService.getNewFormModel(this.formBillingAddressDefinition, true, this.dataBillingAddress);
-      this.modelMailingAddress = this.formsService.getNewFormModel(this.formMailingAddressDefinition, true, this.dataMailingAddress);
+      if (this.signinService.user) {
+        this.user = this.signinService.user;
+        this.dataBillingAddress = this.cloneAddress(this.user);
+        this.dataBillingAddress.sameBillingAndMailingAddress = true;
+        this.dataMailingAddress = this.cloneAddress(this.user);
+        this.modelBillingAddress = this.formsService.getNewFormModel(this.formBillingAddressDefinition, true, this.dataBillingAddress);
+        this.modelMailingAddress = this.formsService.getNewFormModel(this.formMailingAddressDefinition, true, this.dataMailingAddress);
+      }
     });
   }
 
@@ -158,9 +161,11 @@ export class CartPage {
   noregister() {
     this.user = {};
     this.dataBillingAddress = {};
+    this.dataBillingAddress.sameBillingAndMailingAddress = true;
     this.dataMailingAddress = {};
     this.modelBillingAddress = this.formsService.getNewFormModel(this.formBillingAddressDefinition, true, this.dataBillingAddress);
     this.modelMailingAddress = this.formsService.getNewFormModel(this.formMailingAddressDefinition, true, this.dataMailingAddress);
+    this.content.resize();
   }
 
   login() {

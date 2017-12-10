@@ -167,4 +167,16 @@ export var APP_TRANSLATIONS: { [key: string]: { [key: string]: string } } = {
         en: '',
         cz: 'Dodací adresa se shoduje s fakturační'
     },
+    signin_password_notmatch: {
+        en: "Password doesn't match",
+        cz: 'Hesla se neshodují'
+    },
+    signin_registration_failed: {
+        en: "Error occured or user already exist.",
+        cz: 'Nastala chyba nebo uživatel už existuje.'
+    },
+    signin_registration_success: {
+        en: "Registration successful.",
+        cz: 'Registrace proběhla úspěšně.'
+    },
 };

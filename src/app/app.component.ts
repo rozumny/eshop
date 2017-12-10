@@ -93,8 +93,8 @@ export class MyApp {
     var userLang = navigator.language.split('-')[0];
     userLang = /(cz|en)/gi.test(userLang) ? userLang : 'en';
     userLang = 'cz'; //TODO: remove for production
-    translate.setDefaultLang(userLang);
-    translate.use(userLang);
+    this.translate.setDefaultLang(userLang);
+    this.translate.use(userLang);
     this.localStorageService.set('lang', userLang);
 
     this.store.select('user').subscribe(() => {
