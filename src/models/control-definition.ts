@@ -29,7 +29,6 @@ export class ControlDefinition {
     public resetValue: string;
     public description: string;
     public translatedDescription: string;
-    public listConfig: any;
     public labels: string[];
     public items: any[];
 

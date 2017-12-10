@@ -17,6 +17,7 @@ import { Linebreak } from '../components/forms/controls/linebreak/linebreak';
 import { TextArea } from '../components/forms/controls/textarea/textarea';
 import { Paragraph } from '../components/forms/controls/paragraph/paragraph';
 import { Color } from '../components/forms/controls/color/color';
+import { Email } from '../components/forms/controls/email/email';
 import { DateControl } from '../components/forms/controls/date/date';
 import { FormButton } from '../components/forms/controls/formbutton/formbutton';
 import { Checkbox } from '../components/forms/controls/checkbox/checkbox';
@@ -126,6 +127,7 @@ export class myTranslationLoader implements TranslateLoader {
     NewForms,
     Paragraph,
     Text,
+    Email,
     Header,
     Linebreak,
     TextArea,
@@ -193,6 +195,7 @@ export class myTranslationLoader implements TranslateLoader {
     Paragraph,
     Text,
     Header,
+    Email,
     Linebreak,
     TextArea,
     FormButton,

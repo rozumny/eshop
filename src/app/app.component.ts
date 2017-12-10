@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Platform, MenuController } from 'ionic-angular';
 import { ViewChild } from '@angular/core';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -7,6 +7,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 // import pages
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
+import { RegisterPage } from '../pages/register/register';
 // import { WelcomePage } from '../pages/welcome/welcome';
 // import { MyAccountPage } from '../pages/my-account/my-account';
 import { CartPage } from '../pages/cart/cart';
@@ -16,8 +17,10 @@ import { CategoriesPage } from '../pages/categories/categories';
 import { MyOrderPage } from '../pages/my-order/my-order';
 // end import pages
 
+import { Store } from '@ngrx/store';
 import { TranslateService } from 'ng2-translate';
 import { LocalStorageService } from '../services/local-storage';
+import { SigninService } from '../services/signin-service';
 
 @Component({
   templateUrl: 'app.html',
@@ -53,20 +56,6 @@ export class MyApp {
     // },
 
     {
-      title: 'Moje objednávky',
-      icon: 'ios-timer-outline',
-      count: 0,
-      component: MyOrderPage
-    },
-
-    // {
-    //   title: 'My Account',
-    //   icon: 'ios-contact-outline',
-    //   count: 0,
-    //   component: MyAccountPage
-    // },
-
-    {
       title: 'Košík',
       icon: 'ios-cart-outline',
       count: 1,
@@ -80,11 +69,21 @@ export class MyApp {
     //   component: SettingsPage
     // }
     // import menu
+
+    // {
+    //   title: 'My Account',
+    //   icon: 'ios-contact-outline',
+    //   count: 0,
+    //   component: MyAccountPage
+    // },
   ];
 
   constructor(
     public platform: Platform,
     statusBar: StatusBar,
+    public menu: MenuController,
+    private store: Store<string>,
+    private signinService: SigninService,
     splashScreen: SplashScreen,
     private translate: TranslateService,
     private localStorageService: LocalStorageService
@@ -98,6 +97,10 @@ export class MyApp {
     translate.use(userLang);
     this.localStorageService.set('lang', userLang);
 
+    this.store.select('user').subscribe(() => {
+      this.user = this.signinService.user;
+    });
+
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -107,21 +110,25 @@ export class MyApp {
   }
 
   openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
   }
 
+  openMyOrders() {
+    this.nav.setRoot(MyOrderPage);
+  }
+
   login() {
-    return;
+    this.nav.push(LoginPage);
   }
 
   logout() {
-    return;
+    this.signinService.signout().then(() => {
+      this.menu.close();
+    })
   }
 
   register() {
-    return;
+    this.nav.push(RegisterPage);
   }
 }
 

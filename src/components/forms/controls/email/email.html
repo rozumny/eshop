@@ -1,0 +1,9 @@
+<ion-item class="primarybg  inputColor" *ngIf="show" [class.error]="!control.abstractControl.valid && control.abstractControl.touched">
+    <ion-label stacked class="label">
+        <span *ngIf="control.config.required" class="red">*</span>
+        {{ control.config.label | translate }}
+    </ion-label>
+    <ion-input type="email" [(ngModel)]='control.dataObject[control.dataField]' [formControl]="control.abstractControl"></ion-input>
+</ion-item>
+<div *ngIf="control.abstractControl.hasError('required') && control.abstractControl.touched" class="error-box">* {{ 'form_label_field_required' | translate}} {{ control.config.label | translate }}</div>
+<!--<div *ngIf="control.abstractControl.hasError('minlength') && control.abstractControl.touched" class="error-box">* Minimum {{ control.config.label | translate }} length is 8!</div>-->

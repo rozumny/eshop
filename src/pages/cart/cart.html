@@ -77,7 +77,7 @@
     </div>
   </div>
   <br/>
-  <div class="card">
+  <div class="card" *ngIf="!user">
     <ion-list class="list-full-border" no-margin>
       <ion-list-header>{{'cart_user' | translate }}</ion-list-header>
     </ion-list>
@@ -93,12 +93,32 @@
           {{ 'no_register' | translate }}
         </button>
       </ion-row>
-
-      <div class="align-bottom" padding text-center>
-        {{'register' | translate}}
-        <span class="bold" (click)="register()">{{'register_button' | translate}}</span>
-      </div>
     </div>
+  </div>
+  <br/>
+  <div class="card" *ngIf="user">
+    <ion-list class="list-full-border" no-margin>
+      <ion-list-header>{{'billing_address' | translate }}</ion-list-header>
+    </ion-list>
+
+    <div padding>
+      <newforms [form]="modelBillingAddress | async"></newforms>
+    </div>
+  </div>
+  <br/>
+  <div class="card" *ngIf="user && dataBillingAddress && !dataBillingAddress.sameBillingAndMailingAddress">
+    <ion-list class="list-full-border" no-margin>
+      <ion-list-header>{{'mailing_address' | translate }}</ion-list-header>
+    </ion-list>
+
+    <div padding>
+      <newforms [form]="modelMailingAddress | async"></newforms>
+    </div>
+  </div>
+
+  <div *ngIf="!user" class="align-bottom" padding text-center>
+    {{'register' | translate}}
+    <span class="bold" (click)="register()">{{'register_button' | translate}}</span>
   </div>
 </ion-content>
 

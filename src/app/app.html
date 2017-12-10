@@ -20,6 +20,10 @@
         {{ page.title }}
         <ion-badge color="danger" item-right *ngIf="page.count">{{ page.count }}</ion-badge>
       </button>
+      <button *ngIf="user" ion-item menuClose (click)="openMyOrders()">
+        <ion-icon item-left name="ios-timer-outline"></ion-icon>
+        {{ 'my_orders' | translate }}
+      </button>
       <button *ngIf="user" ion-item menuClose (click)="logout()">
         <ion-icon item-left name="log-out"></ion-icon>
         {{ 'logout' | translate }}
@@ -31,7 +35,7 @@
     </ion-list>
   </ion-content>
   <ion-footer *ngIf="!user">
-    <div class="align-bottom" padding text-center>
+    <div class="align-bottom" menuClose padding text-center>
       {{'register' | translate}}
       <span class="bold" (click)="register()">{{'register_button' | translate}}</span>
     </div>
