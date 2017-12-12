@@ -179,4 +179,12 @@ export var APP_TRANSLATIONS: { [key: string]: { [key: string]: string } } = {
         en: "Registration successful.",
         cz: 'Registrace proběhla úspěšně.'
     },
+    postage: {
+        en: "",
+        cz: 'Doprava'
+    },
+    cart_summary: {
+        en: "",
+        cz: 'Shrnutí'
+    }
 };

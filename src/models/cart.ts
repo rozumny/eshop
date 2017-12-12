@@ -1,9 +1,11 @@
 import { Item } from "./item"
+import { Postage } from "./postage"
 
 export class Cart {
     public date: Date;
     public state: number;
     public items: CartItem[] = [];
+    public postage: Postage = <any>{};
 
     // postage
     // public billingdate: string;
@@ -59,7 +61,10 @@ export class Cart {
     }
 
     public getPostage(): number {
-        return 0;
+        if (this.postage === undefined || this.postage.price === undefined)
+            return 0;
+        else
+            return parseInt(this.postage.price);
     }
 
     public getTotal(): number {

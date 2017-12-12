@@ -17,6 +17,8 @@ import { CategoriesPage } from '../pages/categories/categories';
 import { MyOrderPage } from '../pages/my-order/my-order';
 // end import pages
 
+import { Cart } from '../models/cart';
+import { CartService } from '../services/cart-service';
 import { Store } from '@ngrx/store';
 import { TranslateService } from 'ng2-translate';
 import { LocalStorageService } from '../services/local-storage';
@@ -30,6 +32,7 @@ import { SigninService } from '../services/signin-service';
 })
 export class MyApp {
   public user: any = null;
+  public cart: Cart;
 
   public rootPage: any;
   public nav: any;
@@ -55,13 +58,6 @@ export class MyApp {
     //   component: WishListPage
     // },
 
-    {
-      title: 'Košík',
-      icon: 'ios-cart-outline',
-      count: 1,
-      component: CartPage
-    },
-
     // {
     //   title: 'Settings',
     //   icon: 'ios-settings-outline',
@@ -82,6 +78,7 @@ export class MyApp {
     public platform: Platform,
     statusBar: StatusBar,
     public menu: MenuController,
+    private cartService: CartService,
     private store: Store<string>,
     private signinService: SigninService,
     splashScreen: SplashScreen,
@@ -96,6 +93,10 @@ export class MyApp {
     this.translate.setDefaultLang(userLang);
     this.translate.use(userLang);
     this.localStorageService.set('lang', userLang);
+
+    this.cartService.get().then((cart: Cart) => {
+      this.cart = cart;
+    });
 
     this.store.select('user').subscribe(() => {
       this.user = this.signinService.user;
@@ -115,6 +116,10 @@ export class MyApp {
 
   openMyOrders() {
     this.nav.setRoot(MyOrderPage);
+  }
+
+  openCart() {
+    this.nav.setRoot(CartPage);
   }
 
   login() {

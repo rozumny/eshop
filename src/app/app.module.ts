@@ -34,6 +34,7 @@ import { CategoryService } from '../services/category-service';
 import { ItemService } from '../services/item-service';
 import { UserService } from '../services/user-service';
 import { StoreService } from '../services/store-service';
+import { PostageService } from '../services/postage-service';
 import { CartService } from '../services/cart-service';
 import { OrderService } from '../services/order-service';
 import { NewsService } from '../services/news-service';
@@ -226,6 +227,7 @@ export class myTranslationLoader implements TranslateLoader {
     NewsService,
     FileService,
     SigninService,
+    PostageService,
     ModalService,
     MemoryService,
     Utils,

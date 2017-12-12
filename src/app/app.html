@@ -20,6 +20,10 @@
         {{ page.title }}
         <ion-badge color="danger" item-right *ngIf="page.count">{{ page.count }}</ion-badge>
       </button>
+      <button *ngIf="cart && cart.items.length > 0" ion-item menuClose (click)="openCart()">
+        <ion-icon item-left name="ios-cart-outline"></ion-icon>
+        {{ 'cart_title' | translate }}
+      </button>
       <button *ngIf="user" ion-item menuClose (click)="openMyOrders()">
         <ion-icon item-left name="ios-timer-outline"></ion-icon>
         {{ 'my_orders' | translate }}

@@ -11,6 +11,8 @@ import { CartPage } from "../cart/cart";
 import { MemoryService } from '../../services/memory-service';
 import { ModalService } from '../../services/modal-service';
 import { TranslateService } from 'ng2-translate';
+import { Cart } from '../../models/cart';
+import { CartService } from '../../services/cart-service';
 
 @Component({
   selector: 'page-home',
@@ -27,6 +29,7 @@ export class HomePage {
     }
   ];
 
+  public cart: Cart;
   public categories: any[] = [];
   public items: any = [];
   public title: string = this.translate.instant("title")
@@ -35,6 +38,8 @@ export class HomePage {
     public categoryService: CategoryService,
     public fileService: FileService,
     private modalService: ModalService,
+    private cartService: CartService,
+
     private translate: TranslateService,
     private navParams: NavParams,
     private memoryService: MemoryService,
@@ -43,6 +48,10 @@ export class HomePage {
       this.memoryService.idParam = "test"//this.navParams.data.id;
       this.title = this.navParams.data.id.toUpperCase();
     }
+
+    this.cartService.get().then((cart: Cart) => {
+      this.cart = cart;
+    });
 
     let promises = [];
     promises.push(categoryService.getAll().then(categories => {
