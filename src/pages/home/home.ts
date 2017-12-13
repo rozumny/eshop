@@ -53,7 +53,9 @@ export class HomePage {
     }));
 
     promises.push(slideService.getAll().then(slides => {
-      this.slides = slides;
+      if (slides.length > 0) {
+        this.slides = slides;
+      }
     }));
 
     promises.push(itemService.getAll().then(items => {
