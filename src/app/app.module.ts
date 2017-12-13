@@ -38,6 +38,7 @@ import { PostageService } from '../services/postage-service';
 import { CartService } from '../services/cart-service';
 import { OrderService } from '../services/order-service';
 import { NewsService } from '../services/news-service';
+import { SlideService } from '../services/slide-service';
 import { FileService } from '../services/file-service';
 import { SigninService } from '../services/signin-service';
 import { LocalStorageService } from '../services/local-storage';
@@ -227,6 +228,7 @@ export class myTranslationLoader implements TranslateLoader {
     NewsService,
     FileService,
     SigninService,
+    SlideService,
     PostageService,
     ModalService,
     MemoryService,

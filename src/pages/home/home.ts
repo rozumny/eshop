@@ -13,6 +13,7 @@ import { ModalService } from '../../services/modal-service';
 import { TranslateService } from 'ng2-translate';
 import { Cart } from '../../models/cart';
 import { CartService } from '../../services/cart-service';
+import { SlideService } from '../../services/slide-service';
 
 @Component({
   selector: 'page-home',
@@ -20,15 +21,7 @@ import { CartService } from '../../services/cart-service';
 })
 export class HomePage {
   // list slides for slider
-  public slides = [
-    {
-      src: 'assets/img/slide_2.jpg'
-    },
-    {
-      src: 'assets/img/slide_3.jpg'
-    }
-  ];
-
+  public slides: any[];
   public cart: Cart;
   public categories: any[] = [];
   public items: any = [];
@@ -36,6 +29,7 @@ export class HomePage {
 
   constructor(public nav: NavController,
     public categoryService: CategoryService,
+    public slideService: SlideService,
     public fileService: FileService,
     private modalService: ModalService,
     private cartService: CartService,
@@ -56,6 +50,10 @@ export class HomePage {
     let promises = [];
     promises.push(categoryService.getAll().then(categories => {
       this.categories = categories;
+    }));
+
+    promises.push(slideService.getAll().then(slides => {
+      this.slides = slides;
     }));
 
     promises.push(itemService.getAll().then(items => {
