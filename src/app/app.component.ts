@@ -9,7 +9,7 @@ import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
 // import { WelcomePage } from '../pages/welcome/welcome';
-// import { MyAccountPage } from '../pages/my-account/my-account';
+import { MyAccountPage } from '../pages/my-account/my-account';
 import { CartPage } from '../pages/cart/cart';
 // import { SettingsPage } from '../pages/settings/settings';
 import { CategoriesPage } from '../pages/categories/categories';
@@ -118,6 +118,10 @@ export class MyApp {
     this.nav.setRoot(MyOrderPage);
   }
 
+  openMyAccount() {
+    this.nav.setRoot(MyAccountPage);
+  }
+
   openCart() {
     this.nav.setRoot(CartPage);
   }
@@ -128,7 +132,9 @@ export class MyApp {
 
   logout() {
     this.signinService.signout().then(() => {
-      this.menu.close();
+      this.nav.setRoot(HomePage).then(() => {
+        this.menu.close();
+      })
     })
   }
 

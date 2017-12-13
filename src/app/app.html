@@ -24,6 +24,10 @@
         <ion-icon item-left name="ios-cart-outline"></ion-icon>
         {{ 'cart_title' | translate }}
       </button>
+      <button *ngIf="user" ion-item menuClose (click)="openMyAccount()">
+        <ion-icon item-left name="ios-contact-outline"></ion-icon>
+        {{ 'my_account' | translate }}
+      </button>
       <button *ngIf="user" ion-item menuClose (click)="openMyOrders()">
         <ion-icon item-left name="ios-timer-outline"></ion-icon>
         {{ 'my_orders' | translate }}
