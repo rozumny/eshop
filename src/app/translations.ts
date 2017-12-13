@@ -131,6 +131,18 @@ export var APP_TRANSLATIONS: { [key: string]: { [key: string]: string } } = {
         en: '',
         cz: 'Moje objednávky'
     },
+    order_number: {
+        en: '',
+        cz: 'Číslo objednávky'
+    },
+    order_state: {
+        en: '',
+        cz: 'Stav'
+    },
+    order_date: {
+        en: '',
+        cz: 'Datum'
+    },
     firstname: {
         en: '',
         cz: 'Jméno'

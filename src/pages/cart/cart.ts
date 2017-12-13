@@ -189,6 +189,9 @@ export class CartPage {
     this.modalService.showWait(
       this.cartService.checkOrder(this.cart).then(result => {
         if (result.success) {
+          if (this.signinService.user) {
+            this.cart.userId = this.signinService.user._id;
+          }
           return this.cartService.order(this.cart).then(result => {
             this.modalService.createToast("cart_order_message").present();
             this.cartService.clear();

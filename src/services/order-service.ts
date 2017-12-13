@@ -1,28 +1,29 @@
-import {Injectable} from "@angular/core";
-import {ORDERS} from "./mock-orders";
+import { Injectable } from "@angular/core";
+import { ORDERS } from "./mock-orders";
+import { FileService } from "./file-service";
+import { Utils } from "./utils-service";
+import { Cart } from "../models/cart";
+import { Item } from "../models/item";
 
 @Injectable()
 export class OrderService {
   private orders: any;
 
-  constructor() {
+  constructor(private fileService: FileService) {
     this.orders = ORDERS;
   }
 
-  getAll() {
-    return this.orders;
-  }
-
-  getItem(id) {
-    for (var i = 0; i < this.orders.length; i++) {
-      if (this.orders[i].id === parseInt(id)) {
-        return this.orders[i];
-      }
-    }
-    return null;
-  }
-
-  remove(item) {
-    this.orders.splice(this.orders.indexOf(item), 1);
+  getAll(): Promise<any[]> {
+    return this.fileService.get("orders").then(result => {
+      this.orders = Utils.objectToArrayStoreKeys(result);
+      this.orders = this.orders.map(x => Utils.createObjectFromType(Cart, x));
+      this.orders.forEach(x => {
+        x.items.forEach(y => {
+          y.item = Utils.createObjectFromType(Item, y.item);
+        })
+      });
+      this.orders.reverse();
+      return this.orders;
+    })
   }
 }

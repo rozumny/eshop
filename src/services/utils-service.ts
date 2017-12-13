@@ -239,4 +239,8 @@ export class Utils {
     public static createObjectFromType(type: any, data: any): any {
         return Object.assign(new type(), data);
     }
+
+    public static getStatus() {
+        return [{ value: 0, label: 'Čeká na platbu' }, { value: 1, label: 'Připravena' }, { value: 3, label: 'Odeslána' }, { value: 4, label: 'Doručena' }];
+    }
 }

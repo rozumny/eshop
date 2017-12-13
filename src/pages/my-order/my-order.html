@@ -1,38 +1,29 @@
-<!--
-  Generated template for the ProfilePage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar color="primary">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Moje objednávky</ion-title>
+    <ion-title>{{'my_orders' | translate}}</ion-title>
   </ion-navbar>
-
 </ion-header>
-
 
 <ion-content padding class="my-order common-bg">
   <div class="card light-bg" margin-top *ngFor="let order of orders; let orderIndex = index">
     <div class="card-header" padding>
-      <div>Číslo objednávky: {{ order.transaction_id }}</div>
-      <div>Datum: {{ order.created_at }}</div>
+      <div>{{'order_number' | translate }}: {{ order.key }}</div>
+      <div>{{'order_state' | translate }}: {{ getStateString(order.state) }}</div>
+      <div>{{'order_date' | translate }}: {{ order.date | date }}</div>
     </div>
 
     <ion-list class="list-full-border" no-margin>
       <ion-item class="product" *ngFor="let item of order.items; let i = index">
         <ion-thumbnail item-left>
-          <img src="{{ item.thumb }}">
+          <img src="{{ fileService.url + '/' + item.item.filenames[0] }}">
         </ion-thumbnail>
-        <!--item's information-->
         <div>
-          <div text-wrap>{{ item.name }}</div>
+          <div text-wrap>{{ item.item.name }}</div>
           <div padding-bottom>
-            <span class="pull-right">{{ item.price | currency:'CZK':true }} x {{ item.quantity }}</span>
+            <span class="pull-right">{{ item.item.getPrice() | currency:'CZK':true }} x {{ item.quantity }}</span>
             <div class="clear"></div>
           </div>
         </div>
@@ -41,8 +32,8 @@
 
     <div class="card-footer" padding>
       <div>
-        <span class="pull-left" ion-text color="gray">Celkem</span>
-        <span class="pull-right bold" ion-text color="danger">{{ order.total | currency:'CZK':true }}</span>
+        <span class="pull-left" ion-text color="gray">{{'cart_total' | translate}}</span>
+        <span class="pull-right bold" ion-text color="danger">{{ order.getTotal() | currency:'CZK':true }}</span>
         <div class="clear"></div>
       </div>
     </div>

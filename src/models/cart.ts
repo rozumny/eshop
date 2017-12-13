@@ -2,6 +2,7 @@ import { Item } from "./item"
 import { Postage } from "./postage"
 
 export class Cart {
+    public userId: string;
     public date: Date;
     public state: number;
     public items: CartItem[] = [];
