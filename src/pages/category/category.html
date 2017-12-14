@@ -1,29 +1,21 @@
-<!--
-  Generated template for the ProfilePage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar color="primary">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>{{ category.title }}</ion-title>
-    <ion-buttons end>
+    <!-- <ion-buttons end>
       <button ion-button (click)="goToCart()">
         <ion-icon name="cart"></ion-icon>
       </button>
-    </ion-buttons>
+    </ion-buttons> -->
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content>
 
-  <div padding class="border-bottom text-lg">
+  <!-- <div padding class="border-bottom text-lg">
     <span class="pull-left" (click)="chooseSortBy()" ion-text color="gray">
       {{ sortBy }}
       <ion-icon name="md-arrow-dropdown"></ion-icon>
@@ -31,7 +23,7 @@
     <ion-icon class="pull-right" name="apps" (click)="viewGrid()" [hidden]="viewType == 'grid'"></ion-icon>
     <ion-icon class="pull-right" name="menu" (click)="viewList()" [hidden]="viewType == 'list'"></ion-icon>
     <div class="clear"></div>
-  </div>
+  </div> -->
 
   <!--List of items-->
   <ion-list no-margin class="list-full-border list-products" [ngClass]="{'grid': viewType == 'grid', 'list': viewType == 'list'}">
