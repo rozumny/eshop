@@ -79,6 +79,34 @@ export var APP_TRANSLATIONS: { [key: string]: { [key: string]: string } } = {
         en: 'Email',
         cz: 'Email'
     },
+    signin_send_success: {
+        en: 'Code was sent to your email',
+        cz: 'Kód byl odeslán na Váš email'
+    },
+    signin_send_failed: {
+        en: 'Sending code failed',
+        cz: 'Odesílání kódu selhalo'
+    },
+    signin_reset_success: {
+        en: 'Your password was changed',
+        cz: 'Heslo bylo změněno'
+    },
+    signin_reset_failed: {
+        en: 'Reseting password failed',
+        cz: 'Nastala chyba při resetování hesla'
+    },
+    signin_send: {
+        en: 'Send',
+        cz: 'Odeslat'
+    },
+    signin_code: {
+        en: 'confirmation code',
+        cz: 'Potvrzovací kód'
+    },
+    reset_code: {
+        en: '',
+        cz: 'Potvrzovací kód'
+    },
     login_text: {
         en: "",
         cz: "Máte účet?"
@@ -134,6 +162,10 @@ export var APP_TRANSLATIONS: { [key: string]: { [key: string]: string } } = {
     my_account: {
         en: '',
         cz: 'Můj účet'
+    },
+    forgot_password_title: {
+        en: '',
+        cz: 'Zapomenuté heslo'
     },
     order_number: {
         en: '',

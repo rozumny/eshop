@@ -73,30 +73,55 @@ export class SigninService {
         });
     }
 
-    deleteUser(user: User): Promise<any> {
-        return new Promise<void>((resolve, reject) => {
-            var headers = new Headers();
-            headers.append('x-access-token', this.user.token);
-            var options = new RequestOptions({ headers: headers });
+    // deleteUser(user: User): Promise<any> {
+    //     return new Promise<void>((resolve, reject) => {
+    //         var headers = new Headers();
+    //         headers.append('x-access-token', this.user.token);
+    //         var options = new RequestOptions({ headers: headers });
 
-            this.http.delete(this.apiUrl + '/' + user._id, options)
+    //         this.http.delete(this.apiUrl + '/' + user._id, options)
+    //             .subscribe(response => {
+    //                 resolve();
+    //             }, error => {
+    //                 reject(error);
+    //             });
+    //     });
+    // }
+
+    // getUsers(): Promise<User[]> {
+    //     return new Promise<User[]>((resolve, reject) => {
+    //         var headers = new Headers();
+    //         headers.append('x-access-token', this.user.token);
+    //         var options = new RequestOptions({ headers: headers });
+
+    //         this.http.get(this.apiUrl, options)
+    //             .subscribe(response => {
+    //                 resolve(response.json());
+    //             }, error => {
+    //                 reject(error);
+    //             });
+    //     });
+    // }
+
+
+    sendcode(data: any): Promise<any> {
+        return new Promise<any>((resolve, reject) => {
+            this.http.post(this.apiUrl + "/sendcode", data)
+                .map(res => res.json())
                 .subscribe(response => {
-                    resolve();
+                    resolve(response);
                 }, error => {
                     reject(error);
                 });
         });
     }
 
-    getUsers(): Promise<User[]> {
-        return new Promise<User[]>((resolve, reject) => {
-            var headers = new Headers();
-            headers.append('x-access-token', this.user.token);
-            var options = new RequestOptions({ headers: headers });
-
-            this.http.get(this.apiUrl, options)
+    resetpassword(data: any): Promise<any> {
+        return new Promise<any>((resolve, reject) => {
+            this.http.post(this.apiUrl + "/resetpassword", data)
+                .map(res => res.json())
                 .subscribe(response => {
-                    resolve(response.json());
+                    resolve(response);
                 }, error => {
                     reject(error);
                 });
