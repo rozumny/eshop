@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { LoginPage } from "../login/login";
 import { SigninService } from "../../services/signin-service";
 import { ModalService } from "../../services/modal-service";
 

@@ -231,6 +231,10 @@ export var APP_TRANSLATIONS: { [key: string]: { [key: string]: string } } = {
         en: "",
         cz: 'Doprava'
     },
+    payment: {
+        en: "",
+        cz: 'Platební metoda'
+    },
     cart_summary: {
         en: "",
         cz: 'Shrnutí'

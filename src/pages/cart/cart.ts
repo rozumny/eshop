@@ -11,6 +11,7 @@ import { CartService } from '../../services/cart-service';
 import { Store } from '@ngrx/store';
 import { SigninService } from '../../services/signin-service';
 import { PostageService } from '../../services/postage-service';
+import { PaymentService } from '../../services/payment-service';
 import { FormDefinition } from '../../models/form-definition';
 import { FormsService } from '../../services/forms-service';
 import { Form } from '../../models/form';
@@ -25,12 +26,16 @@ export class CartPage {
   private modelBillingAddress: Promise<Form>;
   private modelMailingAddress: Promise<Form>;
   private modelPostage: Promise<Form>;
+  private modelPayment: Promise<Form>;
   private dataBillingAddress: any = {};
   private dataMailingAddress: any = {};
   private dataPostages: any = {};
+  private dataPayments: any = {};
   public user: any = null;
   public postageOptions: any[];
   private postages: any[];
+  public paymentOptions: any[];
+  private payments: any[];
   public cart: Cart;
   public total: number;
   private formBillingAddressDefinition = <FormDefinition>{
@@ -87,6 +92,7 @@ export class CartPage {
   };
   private formMailingAddressDefinition: FormDefinition;
   private formPostageDefinition: FormDefinition;
+  private formPaymentDefinition: FormDefinition;
 
   constructor(
     public navCtrl: NavController,
@@ -95,6 +101,7 @@ export class CartPage {
     public modalService: ModalService,
     private store: Store<string>,
     private postageService: PostageService,
+    private paymentService: PaymentService,
     private formsService: FormsService,
     public signinService: SigninService,
     private cartService: CartService
@@ -106,7 +113,12 @@ export class CartPage {
     f.fields.splice(f.fields.length - 1, 1);
     this.formMailingAddressDefinition = f;
 
-    this.modalService.showWait(this.postageService.getAll().then((postages) => {
+    let promises = [];
+    promises.push(this.postageService.getAll());
+    promises.push(this.paymentService.getAll())
+
+    this.modalService.showWait(Promise.all(promises).then(result => {
+      let postages = result[0];
       this.postages = postages;
       this.postageOptions = postages.map(x => {
         return {
@@ -129,11 +141,38 @@ export class CartPage {
 
       this.modelPostage = this.formsService.getNewFormModel(this.formPostageDefinition, true, this.dataPostages);
 
+      let payments = result[1];
+      this.payments = payments;
+      this.paymentOptions = payments.map(x => {
+        return {
+          label: x.title + " (" + x.price + "Kč)",
+          value: x.key
+        }
+      });
+      this.formPaymentDefinition = <FormDefinition>{
+        fields: [
+          (<any>{
+            type: 'combobox',
+            label: 'payment',
+            name: 'payment',
+            required: "true",
+            onchange: "payment",
+            populateData: this.paymentOptions
+          })
+        ]
+      };
+
+      this.modelPayment = this.formsService.getNewFormModel(this.formPaymentDefinition, true, this.dataPayments);
+
       this.cartService.get().then((cart: Cart) => {
         this.cart = cart;
         this.dataPostages.postage = cart.postage.key ? cart.postage.key : this.postages[0].key;
         if (!this.cart.postage.key) {
           this.cart.postage = this.postages[0];
+        }
+        this.dataPayments.payment = cart.payment.key ? cart.payment.key : this.payments[0].key;
+        if (!this.cart.payment.key) {
+          this.cart.payment = this.payments[0];
         }
         this.content.resize();
       });
@@ -142,6 +181,11 @@ export class CartPage {
     this.events.unsubscribe("postage");
     this.events.subscribe("postage", (event) => {
       this.cart.postage = this.postages.find(x => x.key === event.value);
+    })
+
+    this.events.unsubscribe("payment");
+    this.events.subscribe("payment", (event) => {
+      this.cart.payment = this.payments.find(x => x.key === event.value);
     })
 
     this.store.select('user').subscribe(() => {

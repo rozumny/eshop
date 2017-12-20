@@ -35,6 +35,7 @@ import { ItemService } from '../services/item-service';
 import { UserService } from '../services/user-service';
 import { StoreService } from '../services/store-service';
 import { PostageService } from '../services/postage-service';
+import { PaymentService } from '../services/payment-service';
 import { CartService } from '../services/cart-service';
 import { OrderService } from '../services/order-service';
 import { NewsService } from '../services/news-service';
@@ -230,6 +231,7 @@ export class myTranslationLoader implements TranslateLoader {
     SigninService,
     SlideService,
     PostageService,
+    PaymentService,
     ModalService,
     MemoryService,
     Utils,

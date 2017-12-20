@@ -1,5 +1,6 @@
 import { Item } from "./item"
 import { Postage } from "./postage"
+import { Payment } from "./payment"
 
 export class Cart {
     public userId: string;
@@ -7,6 +8,7 @@ export class Cart {
     public state: number;
     public items: CartItem[] = [];
     public postage: Postage = <any>{};
+    public payment: Payment = <any>{};
 
     // postage
     // public billingdate: string;
@@ -68,8 +70,15 @@ export class Cart {
             return parseInt(this.postage.price);
     }
 
+    public getPayment(): number {
+        if (this.payment === undefined || this.payment.price === undefined)
+            return 0;
+        else
+            return parseInt(this.payment.price);
+    }
+
     public getTotal(): number {
-        return this.getSubtotal() + this.getPostage();
+        return this.getSubtotal() + this.getPostage() + this.getPayment();
     }
 }
 

@@ -13,6 +13,8 @@
       <div>{{'order_number' | translate }}: {{ order.key }}</div>
       <div>{{'order_state' | translate }}: {{ getStateString(order.state) }}</div>
       <div>{{'order_date' | translate }}: {{ order.date | date }}</div>
+      <div>{{'postage' | translate }}: {{ order.postage.title}} ({{ order.postage.price | currency:'CZK':true }})</div>
+      <div>{{'payment' | translate }}: {{ order.payment.title}} ({{ order.payment.price | currency:'CZK':true }})</div>
     </div>
 
     <ion-list class="list-full-border" no-margin>
