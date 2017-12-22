@@ -6,7 +6,9 @@ import { Utils } from "./utils-service";
 export class PaymentService {
   private payments: any;
 
-  constructor(private fileService: FileService) {
+  constructor(
+    private fileService: FileService
+  ) {
   }
 
   getAll(): Promise<any[]> {

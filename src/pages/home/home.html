@@ -22,7 +22,7 @@
 
 <ion-content class=" common-bg">
   <ion-slides *ngIf="slides" pager autoplay="4000">
-    <ion-slide *ngFor="let slide of slides">
+    <ion-slide *ngFor="let slide of slides" (click)="openSlide(slide)">
       <img src="{{ fileService.url + '/' + slide.filename }}" alt="">
     </ion-slide>
   </ion-slides>

@@ -8,7 +8,7 @@ import { CategoryPage } from "../category/category";
 import { ItemPage } from "../item/item";
 import { SearchPage } from "../search/search";
 import { CartPage } from "../cart/cart";
-import { MemoryService } from '../../services/memory-service';
+import { AdminService } from '../../services/admin-service';
 import { ModalService } from '../../services/modal-service';
 import { TranslateService } from 'ng2-translate';
 import { Cart } from '../../models/cart';
@@ -36,38 +36,56 @@ export class HomePage {
 
     private translate: TranslateService,
     private navParams: NavParams,
-    private memoryService: MemoryService,
+    private adminService: AdminService,
     public itemService: ItemService) {
+    let promises = [];
+
     if (this.navParams.data.id) {
-      this.memoryService.idParam = "test"//this.navParams.data.id;
-      this.title = this.navParams.data.id.toUpperCase();
+      promises.push(this.adminService.get(this.navParams.data.id).then(data => {
+        this.title = data.name;
+        this.init();
+      }));
     }
 
-    this.cartService.get().then((cart: Cart) => {
-      this.cart = cart;
+    //INIT admin service
+    this.adminService.get("test").then(data => {
+      this.title = data.name;
+      this.init();
     });
+  }
 
+  init() {
     let promises = [];
-    promises.push(categoryService.getAll().then(categories => {
+    promises.push(this.categoryService.getAll().then(categories => {
       this.categories = categories;
     }));
 
-    promises.push(slideService.getAll().then(slides => {
+    promises.push(this.slideService.getAll().then(slides => {
       if (slides.length > 0) {
         this.slides = slides;
       }
     }));
 
-    promises.push(itemService.getAll().then(items => {
+    promises.push(this.itemService.getAll().then(items => {
       this.items = items.filter(x => x.enable && x.enable_home);
     }));
 
     this.modalService.showWait(Promise.all(promises));
+
+    this.cartService.get().then((cart: Cart) => {
+      this.cart = cart;
+    });
   }
 
   // view categories
   viewCategories() {
     this.nav.push(CategoriesPage);
+  }
+
+  openSlide(slide) {
+    if (slide.product) {
+      this.nav.push(ItemPage, { key: slide.product.key })
+    }
   }
 
   // view a category

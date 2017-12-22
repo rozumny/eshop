@@ -23,6 +23,8 @@ import { Store } from '@ngrx/store';
 import { TranslateService } from 'ng2-translate';
 import { LocalStorageService } from '../services/local-storage';
 import { SigninService } from '../services/signin-service';
+import { PagesService } from '../services/page-service';
+import { UserPage } from '../pages/user-page/user-page';
 
 @Component({
   templateUrl: 'app.html',
@@ -43,7 +45,6 @@ export class MyApp {
       count: 0,
       component: HomePage
     },
-
     {
       title: 'Kategorie',
       icon: 'ios-list-box-outline',
@@ -73,6 +74,7 @@ export class MyApp {
     //   component: MyAccountPage
     // },
   ];
+  public userPages = [];
 
   constructor(
     public platform: Platform,
@@ -81,6 +83,7 @@ export class MyApp {
     private cartService: CartService,
     private store: Store<string>,
     private signinService: SigninService,
+    private pageService: PagesService,
     splashScreen: SplashScreen,
     private translate: TranslateService,
     private localStorageService: LocalStorageService
@@ -93,6 +96,10 @@ export class MyApp {
     this.translate.setDefaultLang(userLang);
     this.translate.use(userLang);
     this.localStorageService.set('lang', userLang);
+
+    this.pageService.getAll().then(pages => {
+      this.userPages = pages;
+    });
 
     this.cartService.get().then((cart: Cart) => {
       this.cart = cart;
@@ -112,6 +119,10 @@ export class MyApp {
 
   openPage(page) {
     this.nav.setRoot(page.component);
+  }
+
+  openUserPage(page) {
+    this.nav.setRoot(UserPage, page);
   }
 
   openMyOrders() {

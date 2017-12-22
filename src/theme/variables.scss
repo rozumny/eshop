@@ -31,3 +31,7 @@ $ionicons-font-path: "../assets/fonts";
 .red {
   color: color($colors, danger);
 }
+
+button.bar-button:hover {
+color:white !important;
+}

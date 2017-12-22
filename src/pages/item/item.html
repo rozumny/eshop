@@ -43,7 +43,7 @@
     <ion-grid *ngIf="item.amount !== undefined && item.amount > 0">
       <ion-row>
         <ion-col>
-          <button ion-button block class="btn-add-cart" (click)="addToCart(item)">{{'item_add_to_cart' | translate}}</button>
+          <button ion-button block (click)="addToCart(item)">{{'item_add_to_cart' | translate}}</button>
         </ion-col>
         <ion-col>
           <button ion-button color="primary" block (click)="buy(item)">{{'item_buy' | translate}}</button>

@@ -4,6 +4,7 @@ import { Payment } from "./payment"
 
 export class Cart {
     public userId: string;
+    public adminId: string;
     public date: Date;
     public state: number;
     public items: CartItem[] = [];
@@ -53,6 +54,13 @@ export class Cart {
 
     public clear() {
         this.items = [];
+        this.postage = <any>{};
+        this.payment = <any>{};
+        this.userId = null;
+        this.adminId = null;
+        this.date = null;
+        this.state = null;
+
     }
 
     public getSubtotal(): number {

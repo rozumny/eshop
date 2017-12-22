@@ -1,4 +1,4 @@
-<button [color]="control.config.color" ion-button *ngIf="!control.config.hide && (!control.config.subtype || control.config.subtype != 'small')"
+<button color="primary" ion-button *ngIf="!control.config.hide && (!control.config.subtype || control.config.subtype != 'small')"
     class="formbutton" (click)="onClick($event)" block>{{control.config.label | translate }}</button>
-<button [color]="control.config.color" ion-button *ngIf="!control.config.hide && control.config.subtype == 'small'" class="formbutton"
-    (click)="onClick($event)" small>{{control.config.label | translate }}</button>
+<button color="primary" ion-button *ngIf="!control.config.hide && control.config.subtype == 'small'" class="formbutton" (click)="onClick($event)"
+    small>{{control.config.label | translate }}</button>

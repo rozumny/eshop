@@ -10,6 +10,7 @@ import { ModalService } from '../../services/modal-service';
 import { CartService } from '../../services/cart-service';
 import { Store } from '@ngrx/store';
 import { SigninService } from '../../services/signin-service';
+import { AdminService } from '../../services/admin-service';
 import { PostageService } from '../../services/postage-service';
 import { PaymentService } from '../../services/payment-service';
 import { FormDefinition } from '../../models/form-definition';
@@ -44,43 +45,43 @@ export class CartPage {
         type: 'email',
         label: 'signin_email',
         name: 'username',
-        required: "true"
+        required: true
       }),
       {
         type: 'text',
         label: 'firstname',
         name: 'firstname',
-        required: "true"
+        required: true
       },
       {
         type: 'text',
         label: 'lastname',
         name: 'lastname',
-        required: "true"
+        required: true
       },
       {
         type: 'text',
         label: 'city',
         name: 'city',
-        required: "true"
+        required: true
       },
       {
         type: 'text',
         label: 'address',
         name: 'address',
-        required: "true"
+        required: true
       },
       {
         type: 'text',
         label: 'zip',
         name: 'zip',
-        required: "true"
+        required: true
       },
       {
         type: 'text',
         label: 'phone',
         name: 'phone',
-        required: "true"
+        required: true
       },
       {
         type: 'checkbox',
@@ -93,10 +94,12 @@ export class CartPage {
   private formMailingAddressDefinition: FormDefinition;
   private formPostageDefinition: FormDefinition;
   private formPaymentDefinition: FormDefinition;
+  public authForm: any = {};
 
   constructor(
     public navCtrl: NavController,
     public fileService: FileService,
+    private adminService: AdminService,
     private events: Events,
     public modalService: ModalService,
     private store: Store<string>,
@@ -132,7 +135,7 @@ export class CartPage {
             type: 'combobox',
             label: 'postage',
             name: 'postage',
-            required: "true",
+            required: true,
             onchange: "postage",
             populateData: this.postageOptions
           })
@@ -155,7 +158,7 @@ export class CartPage {
             type: 'combobox',
             label: 'payment',
             name: 'payment',
-            required: "true",
+            required: true,
             onchange: "payment",
             populateData: this.paymentOptions
           })
@@ -196,6 +199,7 @@ export class CartPage {
         this.dataMailingAddress = {};
         this.modelBillingAddress = this.formsService.getNewFormModel(this.formBillingAddressDefinition, true, this.dataBillingAddress);
         this.modelMailingAddress = this.formsService.getNewFormModel(this.formMailingAddressDefinition, true, this.dataMailingAddress);
+        this.bindBuyButton();
       } else {
         this.user = null;
       }
@@ -230,11 +234,16 @@ export class CartPage {
       return;
     }
 
+    // if(this.modelBillingAddress)
+
     this.modalService.showWait(
       this.cartService.checkOrder(this.cart).then(result => {
         if (result.success) {
           if (this.signinService.user) {
             this.cart.userId = this.signinService.user._id;
+          }
+          if (this.adminService.idParam) {
+            this.cart.adminId = this.adminService.idParam;
           }
           return this.cartService.order(this.cart).then(result => {
             this.modalService.createToast("cart_order_message").present();
@@ -258,7 +267,16 @@ export class CartPage {
     this.dataMailingAddress = {};
     this.modelBillingAddress = this.formsService.getNewFormModel(this.formBillingAddressDefinition, true, this.dataBillingAddress);
     this.modelMailingAddress = this.formsService.getNewFormModel(this.formMailingAddressDefinition, true, this.dataMailingAddress);
+    this.bindBuyButton();
     this.content.resize();
+  }
+
+  bindBuyButton() {
+    this.modelBillingAddress.then(modelBillingAddressForm => {
+      this.modelMailingAddress.then(modelMailingAddressForm => {
+        this.authForm = modelBillingAddressForm.authForm;
+      });
+    });
   }
 
   login() {

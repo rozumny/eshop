@@ -4,6 +4,7 @@ import { Headers, Http, RequestOptions } from '@angular/http';
 import { Store } from '@ngrx/store';
 import { SETUSER } from '../reducers/user';
 import { Utils } from '../services/utils-service';
+import { AdminService } from '../services/admin-service';
 
 @Injectable()
 export class SigninService {
@@ -15,6 +16,7 @@ export class SigninService {
 
     constructor(
         private store: Store<string>,
+        private adminService: AdminService,
         private http: Http
     ) {
         this.store.select('user').subscribe((user: User) => {
@@ -45,6 +47,9 @@ export class SigninService {
     register(data: User): Promise<User> {
         return new Promise<User>((resolve, reject) => {
             let user = Utils.createObjectFromType(User, data);
+            if (this.adminService.idParam) {
+                user.userId = this.adminService.idParam;
+            }
             delete user["password_repeat"];
             delete user["submit"];
 

@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { ORDERS } from "./mock-orders";
 import { FileService } from "./file-service";
 import { Utils } from "./utils-service";
+import { SigninService } from "./signin-service";
 import { Cart } from "../models/cart";
 import { Item } from "../models/item";
 
@@ -9,12 +10,15 @@ import { Item } from "../models/item";
 export class OrderService {
   private orders: any;
 
-  constructor(private fileService: FileService) {
+  constructor(
+    private fileService: FileService,
+    private signinService: SigninService
+  ) {
     this.orders = ORDERS;
   }
 
   getAll(): Promise<any[]> {
-    return this.fileService.get("orders").then(result => {
+    return this.fileService.get("orders", this.signinService.user._id, true).then(result => {
       this.orders = Utils.objectToArrayStoreKeys(result);
       this.orders = this.orders.map(x => Utils.createObjectFromType(Cart, x));
       this.orders.forEach(x => {

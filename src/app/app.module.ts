@@ -32,11 +32,11 @@ import { Range } from '../components/forms/controls/range/range';
 // import services
 import { CategoryService } from '../services/category-service';
 import { ItemService } from '../services/item-service';
-import { UserService } from '../services/user-service';
 import { StoreService } from '../services/store-service';
 import { PostageService } from '../services/postage-service';
 import { PaymentService } from '../services/payment-service';
 import { CartService } from '../services/cart-service';
+import { PagesService } from '../services/page-service';
 import { OrderService } from '../services/order-service';
 import { NewsService } from '../services/news-service';
 import { SlideService } from '../services/slide-service';
@@ -45,9 +45,11 @@ import { SigninService } from '../services/signin-service';
 import { LocalStorageService } from '../services/local-storage';
 import { ModalService } from '../services/modal-service';
 import { MemoryService } from '../services/memory-service';
+import { AdminService } from '../services/admin-service';
 import { Utils } from '../services/utils-service';
 import { FormService } from '../services/form-service';
 import { FormsService } from '../services/forms-service';
+import { StyleService } from '../services/style-service';
 // end import services
 
 // import pages
@@ -58,6 +60,7 @@ import { ChangePasswordPage } from '../pages/change-password/change-password';
 import { CurrencyConverterPage } from '../pages/currency-converter/currency-converter';
 import { ForgotPasswordPage } from '../pages/forgot-password/forgot-password';
 import { HomePage } from '../pages/home/home';
+import { UserPage } from '../pages/user-page/user-page';
 import { ItemPage } from '../pages/item/item';
 import { LoginPage } from '../pages/login/login';
 import { ModalFilterPage } from '../pages/modal-filter/modal-filter';
@@ -103,6 +106,7 @@ export class myTranslationLoader implements TranslateLoader {
     CartPage,
     CategoriesPage,
     CategoryPage,
+    UserPage,
     ChangePasswordPage,
     CurrencyConverterPage,
     ForgotPasswordPage,
@@ -173,6 +177,7 @@ export class myTranslationLoader implements TranslateLoader {
     CartPage,
     CategoriesPage,
     CategoryPage,
+    UserPage,
     ChangePasswordPage,
     CurrencyConverterPage,
     ForgotPasswordPage,
@@ -222,14 +227,16 @@ export class myTranslationLoader implements TranslateLoader {
     SplashScreen,
     CategoryService,
     ItemService,
-    UserService,
     StoreService,
     CartService,
+    PagesService,
     OrderService,
     NewsService,
+    AdminService,
     FileService,
     SigninService,
     SlideService,
+    StyleService,
     PostageService,
     PaymentService,
     ModalService,

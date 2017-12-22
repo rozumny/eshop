@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 // import { User } from '../models/user';
 import { Headers, Http, RequestOptions } from '@angular/http';
 import { SigninService } from './signin-service';
-import { MemoryService } from "./memory-service";
+// import { MemoryService } from "./memory-service";
+import { AdminService } from "./admin-service";
 
 @Injectable()
 export class FileService {
@@ -13,19 +14,30 @@ export class FileService {
 
     constructor(
         private http: Http,
-        private memoryService: MemoryService,
-        private signinService: SigninService
+        // private memoryService: MemoryService,
+        private signinService: SigninService,
+        private adminService: AdminService
     ) {
     }
 
-    get(key: string): Promise<any> {
+    get(key: string, userId?: string, hasAdminId?: boolean): Promise<any> {
         return new Promise<void>((resolve, reject) => {
             var headers = new Headers();
-            if (this.signinService.user)
-                headers.append('x-access-token', this.signinService.user.token);
-            if (this.memoryService.idParam) {
-                headers.append('id-param', this.memoryService.idParam);
+            // potrebuju tohle?
+            // if (this.signinService.user) {
+            //     headers.append('x-access-token', this.signinService.user.token);
+            // }
+
+            if (hasAdminId) {
+                headers.append('admin-id', this.adminService.idParam);
             }
+
+            if (userId) {
+                headers.append('user-id', userId);
+            } else if (this.adminService.idParam) {
+                headers.append('user-id', this.adminService.idParam);
+            }
+
             var options = new RequestOptions({ headers: headers });
 
             this.http.get(this.apiUrl + key, options)

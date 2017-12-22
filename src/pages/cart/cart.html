@@ -157,7 +157,7 @@
     <span class="bold" ion-text color="danger">{{ cart.getTotal() | currency:'CZK':true }}</span>
   </ion-title>
   <ion-buttons end>
-    <button ion-button (click)="buy()" color="danger">
+    <button [disabled]="!authForm.valid" ion-button (click)="buy()" color="primary">
       {{'cart_order' | translate}}
     </button>
   </ion-buttons>

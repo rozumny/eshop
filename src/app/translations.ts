@@ -207,6 +207,10 @@ export var APP_TRANSLATIONS: { [key: string]: { [key: string]: string } } = {
         en: '',
         cz: 'Fakturační adresa'
     },
+    form_label_field_required: {
+        en: '',
+        cz: 'Tato položka je povinná'
+    },
     mailing_address: {
         en: '',
         cz: 'Doručovací adresa'

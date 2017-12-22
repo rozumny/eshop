@@ -31,12 +31,12 @@ export class LoginPage {
           type: 'email',
           label: 'signin_email',
           name: 'username',
-          required: "true"
+          required: true
         }, {
           type: 'password',
           label: 'signin_password',
           name: 'password',
-          required: "true"
+          required: true
         },
         {
           type: 'button',

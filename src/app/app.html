@@ -32,6 +32,10 @@
         <ion-icon item-left name="ios-timer-outline"></ion-icon>
         {{ 'my_orders' | translate }}
       </button>
+      <button ion-item menuClose *ngFor="let page of userPages" (click)="openUserPage(page)">
+        <ion-icon item-left name="ios-list-box-outline"></ion-icon>
+        {{ page.title }}
+      </button>
       <button *ngIf="user" ion-item menuClose (click)="logout()">
         <ion-icon item-left name="log-out"></ion-icon>
         {{ 'logout' | translate }}
