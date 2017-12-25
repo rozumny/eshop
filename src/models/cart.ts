@@ -5,7 +5,7 @@ import { Payment } from "./payment"
 export class Cart {
     public userId: string;
     public adminId: string;
-    public date: Date;
+    public date: string;
     public state: number;
     public items: CartItem[] = [];
     public postage: Postage = <any>{};

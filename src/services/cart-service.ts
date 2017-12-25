@@ -48,7 +48,9 @@ export class CartService {
       let promises2 = result.map(x => this.fileService.set("products." + x.key + ".amount", x.amount));
       return Promise.all(promises2).then(() => {
         let orderId = UUID.UUID();
-        cart.date = new Date();
+        let d = new Date().toISOString();
+        d = d.substring(0, d.length - 8);
+        cart.date = d;
         cart.state = 0;
         return this.fileService.set("orders." + orderId, cart);
       });
