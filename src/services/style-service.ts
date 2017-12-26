@@ -12,7 +12,7 @@ export class StyleService {
     let styleElement = document.createElement('style');
     styleElement.type = 'text/css';
     styleElement.innerHTML =
-      '.toolbar-background { background-color: ' + style.headerBackgroundColor + '!important } \
+      '.toolbar-background { background-color: ' + style.headerBackgroundColor + ' !important } \
                 ion-toolbar.modal { background-color: '+ style.headerBackgroundModalsColor + ' } \
                 .button:not([color]), .button:not([color]):hover  { color: '+ style.primaryColor + '; background-color: #EBEBEC} \
                 .button[color="primary"], .button[color="primary"]:hover { background-color: '+ style.primaryColor + '} \
