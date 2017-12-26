@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Utils } from './utils-service';
 
 @Injectable()
 export class StyleService {

@@ -2,7 +2,8 @@
     <ion-label>
         {{ control.config.label | translate }}
     </ion-label>
-    <ion-select (ionChange)="onChange($event)" [(ngModel)]='control.dataObject[control.dataField]' [multiple]="isMultiple" [formControl]="control.abstractControl">
+    <ion-select [okText]="'select' | translate" [cancelText]="'cancel' | translate" (ionChange)="onChange($event)" [(ngModel)]='control.dataObject[control.dataField]'
+        [multiple]="isMultiple" [formControl]="control.abstractControl">
         <ion-option [value]="o.value" *ngFor="let o of options">{{o.label}}</ion-option>
     </ion-select>
 </ion-item>

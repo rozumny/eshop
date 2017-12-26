@@ -242,5 +242,13 @@ export var APP_TRANSLATIONS: { [key: string]: { [key: string]: string } } = {
     cart_summary: {
         en: "",
         cz: 'Shrnutí'
+    },
+    select: {
+        en: "",
+        cz: 'Vybrat'
+    },
+    cancel: {
+        en: "",
+        cz: 'Zrušit'
     }
 };
