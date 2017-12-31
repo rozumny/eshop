@@ -39,6 +39,7 @@ export class CartPage {
   private payments: any[];
   public cart: Cart;
   public total: number;
+  public agreeTerms: boolean = false;
   private formBillingAddressDefinition = <FormDefinition>{
     fields: [
       (<any>{

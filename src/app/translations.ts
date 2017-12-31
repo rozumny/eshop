@@ -67,6 +67,10 @@ export var APP_TRANSLATIONS: { [key: string]: { [key: string]: string } } = {
         en: '',
         cz: 'Recepty'
     },
+    agreeTerms: {
+        en: '',
+        cz: 'Souhlasím s obchodními podmínkami'
+    },
     version: {
         en: '',
         cz: 'Verze'

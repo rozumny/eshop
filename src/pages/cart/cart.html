@@ -128,7 +128,17 @@
       <newforms [form]="modelMailingAddress | async"></newforms>
     </div>
   </div>
+
   <br *ngIf="user && dataBillingAddress && !dataBillingAddress.sameBillingAndMailingAddress" />
+
+  <div padding class="card">
+    <ion-item>
+      <ion-label>
+        {{ 'agreeTerms' | translate}}
+      </ion-label>
+      <ion-toggle [(ngModel)]="agreeTerms"></ion-toggle>
+    </ion-item>
+  </div>
 
   <!-- <div class="card" *ngIf="cart">
     <ion-list class="list-full-border" no-margin>
@@ -162,7 +172,7 @@
     <span class="bold" ion-text color="danger">{{ cart.getTotal() | currency:'CZK':true }}</span>
   </ion-title>
   <ion-buttons end>
-    <button [disabled]="!authForm.valid" ion-button (click)="buy()" color="primary">
+    <button [disabled]="!authForm.valid || !agreeTerms" ion-button (click)="buy()" color="primary">
       {{'cart_order' | translate}}
     </button>
   </ion-buttons>
