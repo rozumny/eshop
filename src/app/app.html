@@ -16,34 +16,41 @@
 
     <ion-list class="list-full-border">
       <button ion-item menuClose *ngFor="let page of pages" (click)="openPage(page)">
-        <ion-icon item-left name="{{ page.icon }}"></ion-icon>
+        <!-- <ion-icon item-left name="{{ page.icon }}"></ion-icon> -->
         {{ page.title }}
         <ion-badge color="danger" item-right *ngIf="page.count">{{ page.count }}</ion-badge>
       </button>
       <button *ngIf="cart && cart.items.length > 0" ion-item menuClose (click)="openCart()">
-        <ion-icon item-left name="ios-cart-outline"></ion-icon>
+        <!-- <ion-icon item-left name="ios-cart-outline"></ion-icon> -->
         {{ 'cart_title' | translate }}
       </button>
       <button *ngIf="user" ion-item menuClose (click)="openMyAccount()">
-        <ion-icon item-left name="ios-contact-outline"></ion-icon>
+        <!-- <ion-icon item-left name="ios-contact-outline"></ion-icon> -->
         {{ 'my_account' | translate }}
       </button>
       <button *ngIf="user" ion-item menuClose (click)="openMyOrders()">
-        <ion-icon item-left name="ios-timer-outline"></ion-icon>
+        <!-- <ion-icon item-left name="ios-timer-outline"></ion-icon> -->
         {{ 'my_orders' | translate }}
       </button>
+      <button *ngIf="adminService && adminService.idParam === '5a3a816eda4eef666f98acf7'" ion-item menuClose (click)="openRecipes()">
+        <!-- <ion-icon item-left name="log-in"></ion-icon> -->
+        {{ 'recipes' | translate }}
+      </button>
       <button ion-item menuClose *ngFor="let page of userPages" (click)="openUserPage(page)">
-        <ion-icon item-left name="ios-list-box-outline"></ion-icon>
+        <!-- <ion-icon item-left name="ios-list-box-outline"></ion-icon> -->
         {{ page.title }}
       </button>
       <button *ngIf="user" ion-item menuClose (click)="logout()">
-        <ion-icon item-left name="log-out"></ion-icon>
+        <!-- <ion-icon item-left name="log-out"></ion-icon> -->
         {{ 'logout' | translate }}
       </button>
       <button *ngIf="!user" ion-item menuClose (click)="login()">
-        <ion-icon item-left name="log-in"></ion-icon>
+        <!-- <ion-icon item-left name="log-in"></ion-icon> -->
         {{ 'login' | translate }}
       </button>
+      <ion-item class="gray" style="border:none;">
+        {{ 'version' | translate }} {{version}}
+      </ion-item>
     </ion-list>
   </ion-content>
   <ion-footer *ngIf="!user">

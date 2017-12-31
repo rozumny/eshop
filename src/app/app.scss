@@ -264,3 +264,15 @@ ion-slides[pager] {
     }
   }
 }
+
+.red {
+  color: color($colors, danger);
+}
+
+.gray {
+  color: color($colors, gray);
+}
+
+button.bar-button:hover {
+color:white !important;
+}

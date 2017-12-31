@@ -10,18 +10,8 @@ export class Cart {
     public items: CartItem[] = [];
     public postage: Postage = <any>{};
     public payment: Payment = <any>{};
-
-    // postage
-    // public billingdate: string;
-    // public billingammount: number;
-    // public name: string;
-    // public street: string;
-    // public city: string;
-    // public postal: string;
-    // public ico: string;
-    // public dic: string;
-    // public contactname: string;
-    // public contactphone: string;
+    public billingaddress: any;
+    public mailingaddress: any;
 
     public add(item: any) {
         let i = this.items.find(x => x.item.key === item.key);
@@ -66,7 +56,15 @@ export class Cart {
     public getSubtotal(): number {
         let subtotal = 0;
         this.items.forEach(x => {
-            subtotal += (x.quantity * x.item.getPrice()) + (x.item.price_postage ? parseInt(x.item.price_postage) : 0);
+            subtotal += (x.quantity * x.item.getPrice());
+        });
+        return subtotal;
+    }
+
+    public getExtraPostage() {
+        let subtotal = 0;
+        this.items.forEach(x => {
+            subtotal += (x.item.price_postage ? parseInt(x.item.price_postage) * x.quantity : 0);
         });
         return subtotal;
     }

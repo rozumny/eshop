@@ -48,7 +48,7 @@ export class HomePage {
     }
 
     //INIT admin service
-    this.adminService.get("test").then(data => {
+    this.adminService.get("korea").then(data => {
       this.title = data.name;
       this.init();
     });
@@ -56,7 +56,7 @@ export class HomePage {
 
   init() {
     let promises = [];
-    promises.push(this.categoryService.getAll().then(categories => {
+    promises.push(this.categoryService.getHome().then(categories => {
       this.categories = categories;
     }));
 
@@ -106,5 +106,9 @@ export class HomePage {
   // view cart
   goToCart() {
     this.nav.setRoot(CartPage);
+  }
+
+  discountPercent(originPrice, salePrice) {
+    return Math.round((salePrice - originPrice) * 100 / originPrice)
   }
 }

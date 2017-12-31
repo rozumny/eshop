@@ -55,6 +55,7 @@ import { StyleService } from '../services/style-service';
 // import pages
 import { CartPage } from '../pages/cart/cart';
 import { CategoriesPage } from '../pages/categories/categories';
+import { RecipesPage } from '../pages/recipes/recipes';
 import { CategoryPage } from '../pages/category/category';
 import { ChangePasswordPage } from '../pages/change-password/change-password';
 import { CurrencyConverterPage } from '../pages/currency-converter/currency-converter';
@@ -88,6 +89,7 @@ import { localStorageSync } from 'ngrx-store-localstorage';
 //reducers
 import { user } from '../reducers/user';
 import { cart } from '../reducers/cart';
+import { KoreaService } from '../services/korea-service';
 
 export class myTranslationLoader implements TranslateLoader {
   public getTranslation(lang: string): Observable<any> {
@@ -125,6 +127,7 @@ export class myTranslationLoader implements TranslateLoader {
     TabAttributePage,
     TabFilterPage,
     WelcomePage,
+    RecipesPage,
     WishListPage,
 
     // pipes
@@ -183,6 +186,7 @@ export class myTranslationLoader implements TranslateLoader {
     ForgotPasswordPage,
     HomePage,
     ItemPage,
+    RecipesPage,
     LoginPage,
     ModalFilterPage,
     ModalItemOptionPage,
@@ -233,6 +237,7 @@ export class myTranslationLoader implements TranslateLoader {
     OrderService,
     NewsService,
     AdminService,
+    KoreaService,
     FileService,
     SigninService,
     SlideService,

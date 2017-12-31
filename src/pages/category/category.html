@@ -29,18 +29,17 @@
   <ion-list no-margin class="list-full-border list-products" [ngClass]="{'grid': viewType == 'grid', 'list': viewType == 'list'}">
     <ion-item class="product" *ngFor="let item of items" (click)="viewItem(item.key)">
       <ion-thumbnail item-left>
-        <img src="{{ fileService.url + '/' + item.filenames[0] }}">
+        <img src="{{ item.filenames[0] }}">
       </ion-thumbnail>
       <!--item's information-->
       <div>
         <div text-wrap>{{ item.title }}</div>
         <div>
-          <span ion-text color="danger" *ngIf="item.price_discount">{{ item.price_discount | currency:'CZK':true }}</span>
-          <span ion-text color="danger" *ngIf="!item.price_discount">{{ item.price | currency:'CZK':true }}</span>
+          <span ion-text color="green">{{ item.price | currency:'CZK':true }}</span>
         </div>
         <div class="origin-price text-sm">
-          <span *ngIf="item.price_discount" class="text-decoration">{{ item.price | currency:'CZK':true }}</span>
-          <span *ngIf="item.price_discount" class="discount-rate" ion-text color="danger">{{ discountPercent(item.price, item.price_discount) }}%</span>
+          <span *ngIf="item.price_discount != undefined && item.price_discount != 0" class="red text-decoration">{{ item.price_discount | currency:'CZK':true }}</span>
+          <span *ngIf="item.price_discount != undefined && item.price_discount != 0" class="discount-rate" ion-text color="danger">{{ discountPercent(item.price, item.price_discount) }}%</span>
         </div>
         <!-- <div class="bottom-info text-sm">
           <span ion-text color="gray" class="pull-left" *ngIf="item.shipping == 0">Free shipping</span>

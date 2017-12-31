@@ -25,6 +25,9 @@ import { LocalStorageService } from '../services/local-storage';
 import { SigninService } from '../services/signin-service';
 import { PagesService } from '../services/page-service';
 import { UserPage } from '../pages/user-page/user-page';
+import { RecipesPage } from '../pages/recipes/recipes';
+import { AdminService } from '../services/admin-service';
+import { APP_VERSION } from './version';
 
 @Component({
   templateUrl: 'app.html',
@@ -35,6 +38,7 @@ import { UserPage } from '../pages/user-page/user-page';
 export class MyApp {
   public user: any = null;
   public cart: Cart;
+  public version: string = APP_VERSION;
 
   public rootPage: any;
   public nav: any;
@@ -84,6 +88,7 @@ export class MyApp {
     private store: Store<string>,
     private signinService: SigninService,
     private pageService: PagesService,
+    public adminService: AdminService,
     splashScreen: SplashScreen,
     private translate: TranslateService,
     private localStorageService: LocalStorageService
@@ -135,6 +140,10 @@ export class MyApp {
 
   openCart() {
     this.nav.setRoot(CartPage);
+  }
+
+  openRecipes() {
+    this.nav.setRoot(RecipesPage);
   }
 
   login() {

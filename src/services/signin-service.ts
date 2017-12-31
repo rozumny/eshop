@@ -8,8 +8,7 @@ import { AdminService } from '../services/admin-service';
 
 @Injectable()
 export class SigninService {
-
-    // public url = "http://localhost:8082";
+    // public url = "http://localhost:8083";
     public url = "http://81.201.62.19:8083";
     public apiUrl: string = this.url + "/api/users/";
     public user: User;
@@ -124,6 +123,18 @@ export class SigninService {
     resetpassword(data: any): Promise<any> {
         return new Promise<any>((resolve, reject) => {
             this.http.post(this.apiUrl + "/resetpassword", data)
+                .map(res => res.json())
+                .subscribe(response => {
+                    resolve(response);
+                }, error => {
+                    reject(error);
+                });
+        });
+    }
+
+    notifyorder(data: any): Promise<any> {
+        return new Promise<any>((resolve, reject) => {
+            this.http.post(this.apiUrl + "/notifyorder", data)
                 .map(res => res.json())
                 .subscribe(response => {
                     resolve(response);

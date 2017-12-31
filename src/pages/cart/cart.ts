@@ -113,6 +113,7 @@ export class CartPage {
     f.fields.forEach(x => {
       delete x["required"];
     });
+    f.fields.splice(0, 1);
     f.fields.splice(f.fields.length - 1, 1);
     this.formMailingAddressDefinition = f;
 
@@ -245,6 +246,10 @@ export class CartPage {
           if (this.adminService.idParam) {
             this.cart.adminId = this.adminService.idParam;
           }
+
+          this.cart.billingaddress = this.dataBillingAddress;
+          this.cart.mailingaddress = this.dataMailingAddress;
+
           return this.cartService.order(this.cart).then(result => {
             this.modalService.createToast("cart_order_message").present();
             this.cartService.clear();

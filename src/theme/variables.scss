@@ -14,6 +14,7 @@ $colors: (
   googleplus: #DD4C39,
   bgColor: #EBEBEC,
   gray: #999,
+  green: #004f02,
   orange: #F44336
 );
 
@@ -27,11 +28,3 @@ $font-size-extra-small: 10px;
 @import "ionic.theme.default";
 $ionicons-font-path: "../assets/fonts";
 @import "ionic.ionicons";
-
-.red {
-  color: color($colors, danger);
-}
-
-button.bar-button:hover {
-color:white !important;
-}

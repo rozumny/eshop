@@ -9,7 +9,7 @@ export class UserPage {
   private data: any = {};
 
   constructor(
-    private navParams: NavParams
+    public navParams: NavParams
   ) {
     this.data = navParams.data;
   }

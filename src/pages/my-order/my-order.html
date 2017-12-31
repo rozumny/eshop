@@ -14,13 +14,14 @@
       <div>{{'order_state' | translate }}: {{ getStateString(order.state) }}</div>
       <div>{{'order_date' | translate }}: {{ order.date | date }}</div>
       <div>{{'postage' | translate }}: {{ order.postage.title}} ({{ order.postage.price | currency:'CZK':true }})</div>
+      <div *ngIf="order.getExtraPostage()">{{'extra_postage' | translate }}: {{ order.getExtraPostage() | currency:'CZK':true }}</div>
       <div>{{'payment' | translate }}: {{ order.payment.title}} ({{ order.payment.price | currency:'CZK':true }})</div>
     </div>
 
     <ion-list class="list-full-border" no-margin>
       <ion-item class="product" *ngFor="let item of order.items; let i = index">
         <ion-thumbnail item-left>
-          <img src="{{ fileService.url + '/' + item.item.filenames[0] }}">
+          <img src="{{ item.item.filenames[0] }}">
         </ion-thumbnail>
         <div>
           <div text-wrap>{{ item.item.name }}</div>

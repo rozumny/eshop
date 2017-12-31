@@ -1,6 +1,16 @@
 page-item {
-  img {
+  .text-sm {
+    font-size: 1.8rem;
+  }
+
+  .slideImg {
     height: 350px !important;
+  }
+
+  .discount-rate {
+    font-size: 0.9em;
+    padding: 3px;
+    background: rgba(244, 67, 54, .15);
   }
 }
 

@@ -32,6 +32,10 @@ export class ItemPage {
   //   item.on_wish_list = !item.on_wish_list;
   // }
 
+  discountPercent(originPrice, salePrice) {
+    return Math.round((salePrice - originPrice) * 100 / originPrice)
+  }
+
   // get item options group name
   getOptionGroupsName(item) {
     let optionGroups = [];

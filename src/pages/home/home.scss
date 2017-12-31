@@ -1,12 +1,46 @@
 page-home,
 .home {
 
+  .discount-rate {
+    font-size: 0.9em;
+    padding: 3px;
+    background: rgba(244, 67, 54, .15);
+  }
+
   .card {
     text-align: center;
+    height: 320px;
   }
 
   .image {
+    margin-top:16px;
     height: 150px;
+  }
+
+  .holder {
+    text-align:left;
+    div {
+      font-size: 14px;
+    }
+    .oldprice {
+      font-size: 12px;
+    }
+  }
+
+  .align-bottom {
+    padding: 16px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width:100%;
+    text-align: left;
+  }
+
+  .title {
+    margin:0;
+    font-weight: normal;
+    text-align: left;
+    font-size: 14px;
   }
 
   .category {

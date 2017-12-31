@@ -5,7 +5,7 @@ export var APP_TRANSLATIONS: { [key: string]: { [key: string]: string } } = {
     },
     home_products_title: {
         en: '',
-        cz: 'Produkty'
+        cz: 'Doporučujeme'
     },
     categories_title: {
         en: '',
@@ -31,6 +31,22 @@ export var APP_TRANSLATIONS: { [key: string]: { [key: string]: string } } = {
         en: '',
         cz: 'Počet kusů'
     },
+    item_length: {
+        en: '',
+        cz: 'Délka'
+    },
+    item_weight: {
+        en: '',
+        cz: 'Váha'
+    },
+    item_width: {
+        en: '',
+        cz: 'Šířka'
+    },
+    item_height: {
+        en: '',
+        cz: 'Výška'
+    },
     cart_title: {
         en: '',
         cz: 'Košík'
@@ -42,6 +58,18 @@ export var APP_TRANSLATIONS: { [key: string]: { [key: string]: string } } = {
     cart_postage: {
         en: '',
         cz: 'Poštovné'
+    },
+    extra_postage: {
+        en: '',
+        cz: 'Doprava - příplatek za váhu'
+    },
+    recipes: {
+        en: '',
+        cz: 'Recepty'
+    },
+    version: {
+        en: '',
+        cz: 'Verze'
     },
     cart_total: {
         en: '',

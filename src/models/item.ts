@@ -7,6 +7,6 @@ export class Item {
     public key: string;
 
     public getPrice() {
-        return parseInt(this.price_discount ? this.price_discount : this.price);
+        return parseInt(this.price);
     }
 }
