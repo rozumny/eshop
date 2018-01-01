@@ -7,6 +7,10 @@
 
 // global styles
 
+html {
+  font-family: Georgia, "Times New Roman", Times, serif !important;
+}
+
 .primary-bg {
   background-color: color($colors, primary);
 }

@@ -6,7 +6,7 @@ import { Http } from '@angular/http';
 @Injectable()
 export class KoreaService {
   private items: any;
-  public url = "http://81.201.62.19:8083";
+  public url = "http://api.mobilni-eshop.cz";
   // public url = "http://localhost:8083";
   public apiUrl: string = this.url + "/api/korea/";
 

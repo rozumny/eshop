@@ -9,7 +9,7 @@ import { AdminService } from '../services/admin-service';
 @Injectable()
 export class SigninService {
     // public url = "http://localhost:8083";
-    public url = "http://81.201.62.19:8083";
+    public url = "http://api.mobilni-eshop.cz";
     public apiUrl: string = this.url + "/api/users/";
     public user: User;
 

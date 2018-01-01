@@ -33,7 +33,7 @@
     </div> -->
 
     <div padding margin-top class="border-bottom">
-      <div [innerHtml]="item.description"></div>
+      <div [innerHtml]="item.description | safeHtml"></div>
       <h1 text-center class="price" ion-text color="green" margin-top>{{ item.price | currency:'CZK':true }}</h1>
       <h2 text-center class="text-sm" ion-text color="danger" margin-top *ngIf="item.price_discount != undefined && item.price_discount != 0">
         <span class="origin-price text-decoration">{{ item.price_discount | currency:'CZK':true }}</span>

@@ -8,6 +8,6 @@
 </ion-header>
 
 <ion-content padding class="register">
-  <div [innerHtml]="data.description">
+  <div [innerHtml]="data.description | safeHtml">
   </div>
 </ion-content>

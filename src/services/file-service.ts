@@ -9,7 +9,7 @@ import { AdminService } from "./admin-service";
 export class FileService {
 
     // public url = "http://localhost:8083";
-    public url = "http://81.201.62.19:8083";
+    public url = "http://api.mobilni-eshop.cz";
     public apiUrl: string = this.url + "/api/files/";
 
     constructor(
