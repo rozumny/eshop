@@ -16,10 +16,10 @@
 </ion-header>
 
 
-<ion-content class=" common-bg">
-  <div class="card light-bg">
+<ion-content class="footer common-bg">
+  <div *ngIf="item.filenames">
     <!-- slider on top-->
-    <ion-slides *ngIf="item.filenames" pager autoplay="3000" class="border-bottom">
+    <ion-slides pager autoplay="3000" class="border-bottom">
       <ion-slide *ngFor="let filename of item.filenames">
         <img class="slideImg" src="{{ filename }}" alt="">
       </ion-slide>
@@ -32,30 +32,19 @@
       </button>
     </div> -->
 
-    <div padding margin-top class="border-bottom">
-      <div [innerHtml]="item.description | safeHtml"></div>
-      <h1 text-center class="price" ion-text color="green" margin-top>{{ item.price | currency:'CZK':true }}</h1>
+    <div padding>
+      <h1 text-center class="price" ion-text color="green">{{ item.price | currency:'CZK':true }}</h1>
       <h2 text-center class="text-sm" ion-text color="danger" margin-top *ngIf="item.price_discount != undefined && item.price_discount != 0">
         <span class="origin-price text-decoration">{{ item.price_discount | currency:'CZK':true }}</span>
         <span *ngIf="item.price_discount != undefined && item.price_discount != 0" class="discount-rate" ion-text color="danger">{{ discountPercent(item.price, item.price_discount) }}%</span>
       </h2>
-      <p text-center *ngIf="item.amount !== undefined">{{"item_amount" | translate}}: {{ item.amount }}</p>
+      <!-- <p text-center *ngIf="item.amount !== undefined">{{"item_amount" | translate}}: {{ item.amount }}</p> -->
       <p text-center *ngIf="item.weight !== undefined && item.weight != 0">{{"item_weight" | translate}}: {{ item.weight }} kg</p>
       <p text-center *ngIf="item.height !== undefined && item.height != 0">{{"item_height" | translate}}: {{ item.height }}</p>
       <p text-center *ngIf="item.length !== undefined && item.length != 0">{{"item_length" | translate}}: {{ item.length }}</p>
       <p text-center *ngIf="item.width !== undefined && item.width != 0">{{"item_width" | translate}}: {{ item.width }}</p>
+      <div [innerHtml]="item.description | safeHtml"></div>
     </div>
-
-    <ion-grid *ngIf="item.amount !== undefined && item.amount > 0">
-      <ion-row>
-        <ion-col>
-          <button ion-button block (click)="addToCart(item)">{{'item_add_to_cart' | translate}}</button>
-        </ion-col>
-        <ion-col>
-          <button ion-button color="primary" block (click)="buy(item)">{{'item_buy' | translate}}</button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
 
     <!-- <ion-grid>
       <ion-row class="item-stats">
@@ -172,3 +161,21 @@
     </ion-grid>
   </div> -->
 </ion-content>
+<ion-footer class="footer">
+  <ion-grid *ngIf="item.amount !== undefined && item.amount > 0">
+    <ion-row>
+      <ion-col>
+        <button ion-button block (click)="addToCart(item)">{{'item_add_to_cart' | translate}}</button>
+      </ion-col>
+      <ion-col>
+        <button ion-button color="primary" block (click)="buy(item)">{{'item_buy' | translate}}</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- <ion-buttons>
+    <button [disabled]="!authForm.valid || !agreeTerms" ion-button (click)="buy()" color="primary">
+      {{'cart_order' | translate}}
+    </button>
+  </ion-buttons> -->
+</ion-footer>

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, NavParams, ModalController, Content } from 'ionic-angular';
 import { ItemService } from '../../services/item-service';
 import { ModalService } from '../../services/modal-service';
 // import { ModalItemOptionPage } from "../modal-item-option/modal-item-option";
@@ -12,6 +12,7 @@ import { CartPage } from '../cart/cart';
   templateUrl: 'item.html'
 })
 export class ItemPage {
+  @ViewChild(Content) content: Content;
   public item: any = {};
 
   constructor(public nav: NavController,
@@ -24,6 +25,9 @@ export class ItemPage {
   ) {
     this.modalService.showWait(this.itemService.getItem(this.navParams.get("key"))).then(item => {
       this.item = item;
+      setTimeout(() => {
+        this.content.resize()
+      }, 100)
     });
   }
 

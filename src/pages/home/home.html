@@ -29,17 +29,19 @@
   <!--list categories-->
   <h4 *ngIf="categories && categories.length > 0" text-center>{{ 'categories_title' | translate }}</h4>
 
-  <ion-card *ngIf="categories && categories.length > 0">
+  <ion-card class="card-category" *ngIf="categories && categories.length > 0">
     <ion-list class="cat-list">
       <ion-row>
         <ion-col *ngFor="let cat of categories | slice:0:3; let i = index" (click)="viewCategory(cat)">
-          <div class="category" [style.backgroundImage]="'url(' + cat.filename + ')'">&nbsp;</div>
+          <!-- <div class="category" [style.backgroundImage]="'url(' + cat.filename + ')'">&nbsp;</div> -->
+          <img class="image-category" src="{{ cat.filename }}" alt="{{ cat.title }}">
+
           <!-- <img src="{{ fileService.url + '/' + cat.filename }}" alt=""> -->
-          <div text-center>{{ cat.title }}</div>
+          <div class="categoryTitle" text-center>{{ cat.title }}</div>
         </ion-col>
         <ion-col text-center (click)="viewCategories()">
-          <img src="assets/img/categories/all.png" alt="">
-          <div text-center>{{'all_categories' | translate}}</div>
+          <img class="image-category" src="assets/img/categories/all.png" alt="">
+          <div class="categoryTitle" text-center>{{'all_categories' | translate}}</div>
         </ion-col>
       </ion-row>
     </ion-list>
@@ -71,16 +73,15 @@
   <ion-grid class="list-cards">
     <ion-row>
       <ion-col *ngFor="let item of items" col-6 class="product">
-        <div class="card light-bg">
-          <img (click)="viewItem(item.key)" class="image" *ngIf="item.filenames && item.filenames.length > 0" src="{{ item.filenames[0] }}"
-            alt="{{ item.title }}">
+        <div (click)="viewItem(item.key)" class="card card-product light-bg">
+          <img class="image" *ngIf="item.filenames && item.filenames.length > 0" src="{{ item.filenames[0] }}" alt="{{ item.title }}">
           <!-- <div class="price">{{ item.price | currency:'CZK':true }}</div> -->
-          <div (click)="viewItem(item.key)" padding class="holder">
-            <h4 class="title">{{item.title}}</h4>
+          <div padding class="holder">
+            <h4 class="title giveMeEllipsis">{{item.title}}</h4>
           </div>
           <div class="align-bottom">
-            <div (click)="viewItem(item.key)" class="price" ion-text color="green">{{ item.price | currency:'CZK':true }}</div>
-            <div (click)="viewItem(item.key)" class="oldprice" ion-text color="danger" *ngIf="item.price_discount != undefined && item.price_discount != 0">
+            <div class="price" ion-text color="green">{{ item.price | currency:'CZK':true }}</div>
+            <div class="oldprice" ion-text color="danger" *ngIf="item.price_discount != undefined && item.price_discount != 0">
               <span class="origin-price text-decoration">{{ item.price_discount | currency:'CZK':true }}</span>
               <span *ngIf="item.price_discount != undefined && item.price_discount != 0" class="discount-rate" ion-text color="danger">{{ discountPercent(item.price, item.price_discount) }}%</span>
             </div>
