@@ -40,12 +40,12 @@ export class HomePage {
     public itemService: ItemService) {
     let promises = [];
 
-    if (this.navParams.data.id) {
-      promises.push(this.adminService.get(this.navParams.data.id).then(data => {
-        this.title = data.name;
-        this.init();
-      }));
-    }
+    // if (this.navParams.data.id) {
+    //   promises.push(this.adminService.get(this.navParams.data.id).then(data => {
+    //     this.title = data.name;
+    //     this.init();
+    //   }));
+    // }
 
     //INIT admin service
     this.adminService.get("korea").then(data => {
