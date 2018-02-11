@@ -160,13 +160,13 @@ export class myTranslationLoader implements TranslateLoader {
       backButtonText: '',
       locationStrategy: 'path'
     }
-      // ,
-      // {
-      //   links: [
-      //     { component: HomePage, name: 'Home' },
-      //     { component: HomePage, name: 'Home', segment: ':id' }
-      //   ]
-      // }
+      ,
+      {
+        links: [
+          { component: HomePage, name: 'Home', segment: '' },
+          { component: HomePage, name: 'Home', segment: 'app/:id' }
+        ]
+      }
     ),
     TranslateModule.forRoot({ provide: TranslateLoader, useClass: myTranslationLoader }),
     StoreModule.provideStore(

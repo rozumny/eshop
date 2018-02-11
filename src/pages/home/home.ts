@@ -20,7 +20,6 @@ import { SlideService } from '../../services/slide-service';
   templateUrl: 'home.html'
 })
 export class HomePage {
-  // list slides for slider
   public slides: any[];
   public cart: Cart;
   public categories: any[] = [];
@@ -38,23 +37,20 @@ export class HomePage {
     private navParams: NavParams,
     private adminService: AdminService,
     public itemService: ItemService) {
-    let promises = [];
-
-    // if (this.navParams.data.id) {
-    //   promises.push(this.adminService.get(this.navParams.data.id).then(data => {
-    //     this.title = data.name;
-    //     this.init();
-    //   }));
-    // }
-
-    //INIT admin service
-    this.adminService.get("korea").then(data => {
-      this.title = data.name;
-      this.init();
-    });
+    if (this.navParams.data.id) {
+      this.modalService.showWait(this.adminService.get(this.navParams.data.id).then(data => {
+        this.title = data.name;
+        return this.init();
+      }));
+    } else { //fallback to korea eshop
+      this.modalService.showWait(this.adminService.get("korea").then(data => {
+        this.title = data.name;
+        return this.init();
+      }));
+    }
   }
 
-  init() {
+  init(): Promise<any> {
     let promises = [];
     promises.push(this.categoryService.getHome().then(categories => {
       this.categories = categories;
@@ -70,11 +66,11 @@ export class HomePage {
       this.items = items.filter(x => x.enable && x.enable_home);
     }));
 
-    this.modalService.showWait(Promise.all(promises));
-
     this.cartService.get().then((cart: Cart) => {
       this.cart = cart;
     });
+
+    return Promise.all(promises);
   }
 
   // view categories

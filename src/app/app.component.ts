@@ -82,14 +82,14 @@ export class MyApp {
 
   constructor(
     public platform: Platform,
-    statusBar: StatusBar,
+    private statusBar: StatusBar,
     public menu: MenuController,
     private cartService: CartService,
     private store: Store<string>,
     private signinService: SigninService,
     private pageService: PagesService,
     public adminService: AdminService,
-    splashScreen: SplashScreen,
+    private splashScreen: SplashScreen,
     private translate: TranslateService,
     private localStorageService: LocalStorageService
   ) {
@@ -115,10 +115,8 @@ export class MyApp {
     });
 
     platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      statusBar.styleDefault();
-      splashScreen.hide();
+      this.statusBar.hide();
+      this.splashScreen.hide();
     });
   }
 
