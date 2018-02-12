@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavParams, NavController } from 'ionic-angular';
+import { NavParams, NavController, Events } from 'ionic-angular';
 import { CategoryService } from '../../services/category-service';
 import { FileService } from '../../services/file-service';
 import { ItemService } from '../../services/item-service';
@@ -31,6 +31,7 @@ export class HomePage {
     public categoryService: CategoryService,
     public slideService: SlideService,
     public fileService: FileService,
+    private events: Events,
     private modalService: ModalService,
     private cartService: CartService,
     private translate: TranslateService,
@@ -43,11 +44,13 @@ export class HomePage {
       }
       this.modalService.showWait(this.adminService.get(this.navParams.data.id).then(data => {
         this.title = data.name;
+        this.events.publish("updatePages");
         return this.init();
       }));
     } else { //fallback to korea eshop
       this.modalService.showWait(this.adminService.get("korea").then(data => {
         this.title = data.name;
+        this.events.publish("updatePages");
         return this.init();
       }));
     }

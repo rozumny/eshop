@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Platform, MenuController } from 'ionic-angular';
+import { Platform, MenuController, Events } from 'ionic-angular';
 import { ViewChild } from '@angular/core';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -84,6 +84,7 @@ export class MyApp {
     public platform: Platform,
     private statusBar: StatusBar,
     public menu: MenuController,
+    private events: Events,
     private cartService: CartService,
     private store: Store<string>,
     private signinService: SigninService,
@@ -100,8 +101,11 @@ export class MyApp {
     this.translate.use(userLang);
     this.localStorageService.set('lang', userLang);
 
-    this.pageService.getAll().then(pages => {
-      this.userPages = pages;
+    this.events.unsubscribe("updatePages");
+    this.events.subscribe("updatePages", () => {
+      this.pageService.getAll().then(pages => {
+        this.userPages = pages;
+      });
     });
 
     this.cartService.get().then((cart: Cart) => {
