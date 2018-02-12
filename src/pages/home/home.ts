@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavParams, NavController } from 'ionic-angular';
 import { CategoryService } from '../../services/category-service';
 import { FileService } from '../../services/file-service';
 import { ItemService } from '../../services/item-service';
@@ -32,12 +32,11 @@ export class HomePage {
     public fileService: FileService,
     private modalService: ModalService,
     private cartService: CartService,
-
     private translate: TranslateService,
     private navParams: NavParams,
     private adminService: AdminService,
     public itemService: ItemService) {
-    if (this.navParams.data.id) {
+    if (navParams.data.id) {
       this.modalService.showWait(this.adminService.get(this.navParams.data.id).then(data => {
         this.title = data.name;
         return this.init();
