@@ -55,6 +55,9 @@ export class HomePage {
           return this.init();
         }));
       }
+    } else {
+      this.title = this.adminService.data.name;
+      this.init();
     }
   }
 
