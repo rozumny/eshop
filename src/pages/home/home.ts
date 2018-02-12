@@ -38,21 +38,23 @@ export class HomePage {
     private navParams: NavParams,
     private adminService: AdminService,
     public itemService: ItemService) {
-    if (navParams.data.id) {
-      if (navParams.data.id !== 'korea') {
-        this.url = this.fileService.url + '/';
+    if (!this.adminService.idParam) {
+      if (navParams.data.id) {
+        if (navParams.data.id !== 'korea') {
+          this.url = this.fileService.url + '/';
+        }
+        this.modalService.showWait(this.adminService.get(this.navParams.data.id).then(data => {
+          this.title = data.name;
+          this.events.publish("updatePages");
+          return this.init();
+        }));
+      } else { //fallback to korea eshop
+        this.modalService.showWait(this.adminService.get("korea").then(data => {
+          this.title = data.name;
+          this.events.publish("updatePages");
+          return this.init();
+        }));
       }
-      this.modalService.showWait(this.adminService.get(this.navParams.data.id).then(data => {
-        this.title = data.name;
-        this.events.publish("updatePages");
-        return this.init();
-      }));
-    } else { //fallback to korea eshop
-      this.modalService.showWait(this.adminService.get("korea").then(data => {
-        this.title = data.name;
-        this.events.publish("updatePages");
-        return this.init();
-      }));
     }
   }
 
