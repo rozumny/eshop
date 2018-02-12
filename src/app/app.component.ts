@@ -40,7 +40,7 @@ export class MyApp {
   public cart: Cart;
   public version: string = APP_VERSION;
 
-  public rootPage: any;
+  public rootPage: any = HomePage;
   public nav: any;
   public pages = [
     {
@@ -93,8 +93,6 @@ export class MyApp {
     private translate: TranslateService,
     private localStorageService: LocalStorageService
   ) {
-    this.rootPage = HomePage;
-
     var userLang = navigator.language.split('-')[0];
     userLang = /(cz|en)/gi.test(userLang) ? userLang : 'en';
     userLang = 'cz'; //TODO: remove for production

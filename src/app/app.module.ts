@@ -159,12 +159,11 @@ export class myTranslationLoader implements TranslateLoader {
     IonicModule.forRoot(MyApp, {
       backButtonText: '',
       locationStrategy: 'path'
-    }
-      ,
+    },
       {
         links: [
           { component: HomePage, name: 'Home', segment: '' },
-          { component: HomePage, name: 'Home', segment: 'app/:id' }
+          { component: HomePage, name: 'Home', segment: 'store/:id' }
         ]
       }
     ),
