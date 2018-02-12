@@ -40,9 +40,6 @@ export class HomePage {
     public itemService: ItemService) {
     if (!this.adminService.idParam) {
       if (navParams.data.id) {
-        if (navParams.data.id !== 'korea') {
-          this.url = this.fileService.url + '/';
-        }
         this.modalService.showWait(this.adminService.get(this.navParams.data.id).then(data => {
           this.title = data.name;
           this.events.publish("updatePages");
@@ -62,6 +59,7 @@ export class HomePage {
   }
 
   init(): Promise<any> {
+    this.url = this.adminService.data.username !== "info@jiznikorea.eu" ? this.fileService.url + '/' : "";
     let promises = [];
     promises.push(this.categoryService.getHome().then(categories => {
       this.categories = categories;
