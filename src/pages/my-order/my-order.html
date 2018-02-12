@@ -21,7 +21,7 @@
     <ion-list class="list-full-border" no-margin>
       <ion-item class="product" *ngFor="let item of order.items; let i = index">
         <ion-thumbnail item-left>
-          <img src="{{ item.item.filenames[0] }}">
+          <img src="{{ url + item.item.filenames[0] }}">
         </ion-thumbnail>
         <div>
           <div text-wrap>{{ item.item.name }}</div>

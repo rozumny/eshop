@@ -24,6 +24,7 @@ export class HomePage {
   public cart: Cart;
   public categories: any[] = [];
   public items: any = [];
+  public url: string = "";
   public title: string = this.translate.instant("title")
 
   constructor(public nav: NavController,
@@ -37,6 +38,9 @@ export class HomePage {
     private adminService: AdminService,
     public itemService: ItemService) {
     if (navParams.data.id) {
+      if (navParams.data.id !== 'korea') {
+        this.url = this.fileService.url + '/';
+      }
       this.modalService.showWait(this.adminService.get(this.navParams.data.id).then(data => {
         this.title = data.name;
         return this.init();

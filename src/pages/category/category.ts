@@ -7,6 +7,7 @@ import { ModalFilterPage } from "../modal-filter/modal-filter";
 import { ItemPage } from "../item/item";
 import { CartPage } from "../cart/cart";
 import { FileService } from '../../services/file-service';
+import { AdminService } from '../../services/admin-service';
 
 /*
  Generated class for the LoginPage page.
@@ -21,6 +22,7 @@ import { FileService } from '../../services/file-service';
 export class CategoryPage {
   // list items of this category
   public items: any;
+  public url: string;
 
   // category info
   public category: any;
@@ -33,6 +35,7 @@ export class CategoryPage {
 
   constructor(public nav: NavController,
     public itemService: ItemService,
+    private adminService: AdminService,
     public categoryService: CategoryService,
     private navParams: NavParams,
     private modalService: ModalService,
@@ -42,7 +45,7 @@ export class CategoryPage {
   ) {
     // get list items of a category as sample
     this.category = this.navParams.get("category");
-
+    this.url = this.adminService.data.username === "info@jiznikorea.eu" ? "" : this.fileService.url + '/';
     this.modalService.showWait(this.itemService.getByCategory(this.category.key).then(items => {
       this.items = items;
     }));

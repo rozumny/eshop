@@ -17,6 +17,7 @@ import { FormDefinition } from '../../models/form-definition';
 import { FormsService } from '../../services/forms-service';
 import { Form } from '../../models/form';
 import { Utils } from '../../services/utils-service';
+import { AdminService } from '../../services/admin-service';
 
 @Component({
   selector: 'page-cart',
@@ -40,6 +41,7 @@ export class CartPage {
   public cart: Cart;
   public total: number;
   public agreeTerms: boolean = false;
+  public url: string;
   private formBillingAddressDefinition = <FormDefinition>{
     fields: [
       (<any>{
@@ -110,6 +112,8 @@ export class CartPage {
     public signinService: SigninService,
     private cartService: CartService
   ) {
+    this.url = this.adminService.data.username === "info@jiznikorea.eu" ? "" : this.fileService.url + '/';
+
     let f = Utils.clone(this.formBillingAddressDefinition);
     f.fields.forEach(x => {
       delete x["required"];

@@ -34,7 +34,7 @@
       <ion-row>
         <ion-col *ngFor="let cat of categories | slice:0:3; let i = index" (click)="viewCategory(cat)">
           <!-- <div class="category" [style.backgroundImage]="'url(' + cat.filename + ')'">&nbsp;</div> -->
-          <img class="image-category" src="{{ cat.filename }}" alt="{{ cat.title }}">
+          <img class="image-category" src="{{ url + cat.filename }}" alt="{{ cat.title }}">
 
           <!-- <img src="{{ fileService.url + '/' + cat.filename }}" alt=""> -->
           <div class="categoryTitle" text-center>{{ cat.title }}</div>

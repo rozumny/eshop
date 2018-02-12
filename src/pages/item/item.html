@@ -21,7 +21,7 @@
     <!-- slider on top-->
     <ion-slides pager autoplay="3000" class="border-bottom">
       <ion-slide *ngFor="let filename of item.filenames">
-        <img class="slideImg" src="{{ filename }}" alt="">
+        <img class="slideImg" src="{{ url + filename }}" alt="">
       </ion-slide>
     </ion-slides>
 

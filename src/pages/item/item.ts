@@ -6,6 +6,7 @@ import { ModalService } from '../../services/modal-service';
 import { FileService } from '../../services/file-service';
 import { CartService } from '../../services/cart-service';
 import { CartPage } from '../cart/cart';
+import { AdminService } from '../../services/admin-service';
 
 @Component({
   selector: 'page-item',
@@ -14,15 +15,18 @@ import { CartPage } from '../cart/cart';
 export class ItemPage {
   @ViewChild(Content) content: Content;
   public item: any = {};
+  public url: string;
 
   constructor(public nav: NavController,
     public itemService: ItemService,
+    private adminService: AdminService,
     private navParams: NavParams,
     private modalService: ModalService,
     private cartService: CartService,
     public fileService: FileService,
     public modalCtrl: ModalController
   ) {
+    this.url = this.adminService.data.username !== "info@jiznikorea.eu" ? this.fileService.url + '/' : "";
     this.modalService.showWait(this.itemService.getItem(this.navParams.get("key"))).then(item => {
       this.item = item;
       setTimeout(() => {

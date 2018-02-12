@@ -31,7 +31,7 @@
       </ion-item>
       <ion-item class="product" *ngFor="let cartitem of cart.items">
         <ion-thumbnail item-left *ngIf="cartitem.item.filenames && cartitem.item.filenames.length > 0">
-          <img src="{{ cartitem.item.filenames[0] }}">
+          <img src="{{ url + cartitem.item.filenames[0] }}">
         </ion-thumbnail>
         <!--item's information-->
         <div>
