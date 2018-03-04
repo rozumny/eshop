@@ -8,6 +8,7 @@ import { ItemPage } from "../item/item";
 import { CartPage } from "../cart/cart";
 import { FileService } from '../../services/file-service';
 import { AdminService } from '../../services/admin-service';
+import { ShoptetxmlfeedService } from '../../services/shoptetxmlfeed-service';
 
 /*
  Generated class for the LoginPage page.
@@ -40,15 +41,23 @@ export class CategoryPage {
     private navParams: NavParams,
     private modalService: ModalService,
     public modalCtrl: ModalController,
+    private shoptetxmlfeedService: ShoptetxmlfeedService,
     public fileService: FileService,
     public actionSheetCtrl: ActionSheetController
   ) {
     // get list items of a category as sample
     this.category = this.navParams.get("category");
-    this.url = this.adminService.data.username === "info@jiznikorea.eu" ? "" : this.fileService.url + '/';
-    this.modalService.showWait(this.itemService.getByCategory(this.category.key).then(items => {
+    this.url = this.fileService.url + '/';
+    if (this.adminService.data.username === "info@jiznikorea.eu" ||
+      this.adminService.data.username === "vsebesta@vinova.cz") {
+      this.url = "";
+    }
+
+    let p = this.adminService.data.username === "vsebesta@vinova.cz" ? this.shoptetxmlfeedService.getByCategory(this.category.title) : this.itemService.getByCategory(this.category.key);
+
+    this.modalService.showWait(p).then(items => {
       this.items = items;
-    }));
+    });
   }
 
   // switch to list view

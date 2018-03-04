@@ -50,6 +50,7 @@ import { Utils } from '../services/utils-service';
 import { FormService } from '../services/form-service';
 import { FormsService } from '../services/forms-service';
 import { StyleService } from '../services/style-service';
+import { ShoptetxmlfeedService } from '../services/shoptetxmlfeed-service';
 // end import services
 
 // import pages
@@ -238,6 +239,7 @@ export class myTranslationLoader implements TranslateLoader {
     NewsService,
     AdminService,
     KoreaService,
+    ShoptetxmlfeedService,
     FileService,
     SigninService,
     SlideService,

@@ -231,6 +231,10 @@ export var APP_TRANSLATIONS: { [key: string]: { [key: string]: string } } = {
         en: '',
         cz: 'PSČ'
     },
+    item_manufacturer: {
+        en: '',
+        cz: 'Výrobce'
+    },
     phone: {
         en: '',
         cz: 'Telefon'

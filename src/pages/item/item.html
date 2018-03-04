@@ -38,12 +38,13 @@
         <span class="origin-price text-decoration">{{ item.price_discount | currency:'CZK':true }}</span>
         <span *ngIf="item.price_discount != undefined && item.price_discount != 0" class="discount-rate" ion-text color="danger">{{ discountPercent(item.price, item.price_discount) }}%</span>
       </h2>
+      <div [innerHtml]="item.description | safeHtml"></div>
       <!-- <p text-center *ngIf="item.amount !== undefined">{{"item_amount" | translate}}: {{ item.amount }}</p> -->
       <p text-center *ngIf="item.weight !== undefined && item.weight != 0">{{"item_weight" | translate}}: {{ item.weight }} kg</p>
       <p text-center *ngIf="item.height !== undefined && item.height != 0">{{"item_height" | translate}}: {{ item.height }}</p>
       <p text-center *ngIf="item.length !== undefined && item.length != 0">{{"item_length" | translate}}: {{ item.length }}</p>
       <p text-center *ngIf="item.width !== undefined && item.width != 0">{{"item_width" | translate}}: {{ item.width }}</p>
-      <div [innerHtml]="item.description | safeHtml"></div>
+      <p text-center *ngIf="item.manufacturer !== undefined && item.manufacturer != 0">{{"item_manufacturer" | translate}}: {{ item.manufacturer }}</p>
     </div>
 
     <!-- <ion-grid>

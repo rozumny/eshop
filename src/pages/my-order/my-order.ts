@@ -25,7 +25,12 @@ export class MyOrderPage {
     public signinService: SigninService,
     public fileService: FileService
   ) {
-    this.url = this.adminService.data.username === "info@jiznikorea.eu" ? "" : this.fileService.url + '/';
+    this.url = this.fileService.url + '/';
+    if (this.adminService.data.username === "info@jiznikorea.eu" ||
+      this.adminService.data.username === "vsebesta@vinova.cz") {
+      this.url = "";
+    }
+
     this.modalService.showWait(orderService.getAll().then(data => {
       // this.orders = data.filter(x => x.userId === this.signinService.user._id);
       let promises = [];

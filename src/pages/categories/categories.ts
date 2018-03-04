@@ -4,6 +4,8 @@ import { CategoryService } from '../../services/category-service';
 import { ModalService } from '../../services/modal-service';
 import { CategoryPage } from '../category/category';
 import { CartPage } from "../cart/cart";
+import { ShoptetxmlfeedService } from '../../services/shoptetxmlfeed-service';
+import { AdminService } from '../../services/admin-service';
 
 @Component({
   selector: 'page-categories',
@@ -15,12 +17,16 @@ export class CategoriesPage {
 
   constructor(
     public nav: NavController,
+    private adminService: AdminService,
     public categoryService: CategoryService,
+    private shoptetxmlfeedService: ShoptetxmlfeedService,
     public modalService: ModalService
   ) {
-    this.modalService.showWait(categoryService.getAll().then(categories => {
+
+    let p = this.adminService.data.username === "vsebesta@vinova.cz" ? this.shoptetxmlfeedService.getAllCategories() : categoryService.getAll();
+    this.modalService.showWait(p).then(categories => {
       this.categories = categories;
-    }));
+    });
   }
 
   // view category

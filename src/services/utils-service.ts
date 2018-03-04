@@ -243,4 +243,51 @@ export class Utils {
     public static getStatus() {
         return [{ value: 0, label: 'Čeká na platbu' }, { value: 1, label: 'Připravena' }, { value: 3, label: 'Odeslána' }, { value: 4, label: 'Doručena' }];
     }
+
+    xmlToObject(txt: string): any {
+        let xml;
+        if ((<any>window).DOMParser) {
+            xml = new DOMParser().parseFromString(txt, 'text/xml');
+        }
+        else { // Internet Explorer
+            xml = new (<any>window).ActiveXObject('Microsoft.XMLDOM');
+            xml.async = false;
+            xml.loadXML(txt);
+        }
+
+        return this.convertXml(xml);
+    }
+
+    convertXml(xml: any) {
+        var obj = {};
+        if (xml.nodeType == 1) {
+            if (xml.attributes.length > 0) {
+                obj["@attributes"] = {};
+                for (var j = 0; j < xml.attributes.length; j++) {
+                    var attribute = xml.attributes.item(j);
+                    obj["@attributes"][attribute.nodeName] = attribute.nodeValue;
+                }
+            }
+        } else if (xml.nodeType == 3) {
+            obj = xml.nodeValue;
+        }
+
+        if (xml.hasChildNodes()) {
+            for (var i = 0; i < xml.childNodes.length; i++) {
+                var item = xml.childNodes.item(i);
+                var nodeName = item.nodeName;
+                if (typeof (obj[nodeName]) == "undefined") {
+                    obj[nodeName] = this.convertXml(item);
+                } else {
+                    if (typeof (obj[nodeName].push) == "undefined") {
+                        var old = obj[nodeName];
+                        obj[nodeName] = [];
+                        obj[nodeName].push(old);
+                    }
+                    obj[nodeName].push(this.convertXml(item));
+                }
+            }
+        }
+        return obj;
+    }
 }

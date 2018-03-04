@@ -111,7 +111,11 @@ export class CartPage {
     public signinService: SigninService,
     private cartService: CartService
   ) {
-    this.url = this.adminService.data.username === "info@jiznikorea.eu" ? "" : this.fileService.url + '/';
+    this.url = this.fileService.url + '/';
+    if (this.adminService.data.username === "info@jiznikorea.eu" ||
+      this.adminService.data.username === "vsebesta@vinova.cz") {
+      this.url = "";
+    }
 
     let f = Utils.clone(this.formBillingAddressDefinition);
     f.fields.forEach(x => {

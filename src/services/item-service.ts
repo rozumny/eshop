@@ -4,6 +4,7 @@ import { AdminService } from "./admin-service";
 import { Utils } from "./utils-service";
 import { Item } from "../models/item";
 import { KoreaService } from "./korea-service";
+import { ShoptetxmlfeedService } from "./shoptetxmlfeed-service";
 
 @Injectable()
 export class ItemService {
@@ -12,6 +13,7 @@ export class ItemService {
   constructor(
     private fileService: FileService,
     private koreaService: KoreaService,
+    private shoptetxmlfeedService: ShoptetxmlfeedService,
     private adminService: AdminService
   ) {
   }
@@ -19,6 +21,8 @@ export class ItemService {
   getAll() {
     if (this.adminService.idParam === "5a3a816eda4eef666f98acf7") {
       return this.koreaService.getHome();
+    } else if (this.adminService.idParam === "5a85dcbf8d16327478758e44") {
+      return this.shoptetxmlfeedService.getHome();
     } else {
       return this.fileService.get("products").then(result => {
         this.items = Utils.objectToArrayStoreKeys(result);
@@ -45,6 +49,10 @@ export class ItemService {
   getItem(key: string): Promise<any> {
     if (this.adminService.idParam === "5a3a816eda4eef666f98acf7") {
       return this.koreaService.getItem(key).then(item => {
+        return Utils.createObjectFromType(Item, item);
+      });
+    } else if (this.adminService.idParam === "5a85dcbf8d16327478758e44") {
+      return this.shoptetxmlfeedService.getItem(key).then(item => {
         return Utils.createObjectFromType(Item, item);
       });
     } else {
