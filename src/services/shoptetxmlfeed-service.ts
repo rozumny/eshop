@@ -50,9 +50,9 @@ export class ShoptetxmlfeedService {
     return Promise.resolve(this.items.filter(x => x.categories.indexOf(id) > -1));
   }
 
-  getItem(id) {
+  getItem(title) {
     return new Promise<any>((resolve, reject) => {
-      resolve(this.items.find(x => x.key === id));
+      resolve(this.items.find(x => x.title === title));
     });
   }
 

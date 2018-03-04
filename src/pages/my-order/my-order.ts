@@ -36,7 +36,7 @@ export class MyOrderPage {
       let promises = [];
       promises = data.map(order => {
         order.items.forEach(item => {
-          return this.itemService.getItem(item.item.key).then(y => {
+          return this.itemService.getItem(this.adminService.data.type === 2 ? item.item.title : item.item.key).then(y => {
             item.item.filenames = y.filenames;
           });
         });

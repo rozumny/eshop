@@ -1,5 +1,9 @@
 page-cart,
 .cart {
+  ion-thumbnail img {
+    width: inherit !important;
+    max-width: 80px;
+  }
 
   .card {
     background: color($colors, light);

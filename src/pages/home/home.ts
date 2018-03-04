@@ -46,7 +46,7 @@ export class HomePage {
           return this.init();
         }));
       } else { //fallback to korea eshop
-        this.modalService.showWait(this.adminService.get("zameckesklepy").then(data => {
+        this.modalService.showWait(this.adminService.get("korea").then(data => {
           this.title = data.name;
           this.events.publish("updatePages");
           return this.init();
@@ -94,7 +94,7 @@ export class HomePage {
 
   openSlide(slide) {
     if (slide.product) {
-      this.nav.push(ItemPage, { key: slide.product.key })
+      this.nav.push(ItemPage, { key: this.adminService.data.type === 2 ? slide.product.title : slide.product.key })
     }
   }
 

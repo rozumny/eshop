@@ -27,7 +27,7 @@
 
   <!--List of items-->
   <ion-list no-margin class="list-full-border list-products" [ngClass]="{'grid': viewType == 'grid', 'list': viewType == 'list'}">
-    <ion-item class="product" *ngFor="let item of items" (click)="viewItem(item.key)">
+    <ion-item class="product" *ngFor="let item of items" (click)="viewItem(adminService.data.type === 2 ? item.title : item.key)">
       <ion-thumbnail item-left>
         <img src="{{ url + item.filenames[0] }}">
       </ion-thumbnail>

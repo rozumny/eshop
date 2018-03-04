@@ -73,7 +73,7 @@
   <ion-grid class="list-cards">
     <ion-row>
       <ion-col *ngFor="let item of items" col-6 class="product">
-        <div (click)="viewItem(item.key)" class="card card-product light-bg">
+        <div (click)="viewItem(adminService.data.type === 2 ? item.title : item.key)" class="card card-product light-bg">
 
           <img class="image" *ngIf="item.filenames && item.filenames.length > 0" src="{{ url + item.filenames[0] }}" alt="{{ item.title }}">
           <!-- <div class="price">{{ item.price | currency:'CZK':true }}</div> -->

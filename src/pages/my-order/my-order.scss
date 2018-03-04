@@ -1,4 +1,7 @@
 page-my-order,
 .my-order {
-
+    ion-thumbnail img {
+        width: inherit !important;
+        max-width: 80px;
+      }
 }

@@ -47,10 +47,10 @@ export class CartService {
   }
 
   public order(cart: Cart): Promise<any> {
-    let promises = cart.items.map(x => this.itemService.getItem(x.item.key));
+    let promises = this.adminService.data.type === 2 ? cart.items.map(x => this.itemService.getItem(x.item.title)) : cart.items.map(x => this.itemService.getItem(x.item.key));
     return Promise.all(promises).then(result => {
       result.forEach(item => {
-        item.amount -= cart.items.find(x => x.item.key === item.key).quantity;
+        item.amount -= cart.items.find(x => this.adminService.data.type === 2 ? x.item.title === item.title : x.item.key === item.key).quantity;
       })
 
       let promises2;
@@ -84,11 +84,11 @@ export class CartService {
   }
 
   public checkOrder(cart: Cart): Promise<any> {
-    let promises = cart.items.map(x => this.itemService.getItem(x.item.key));
+    let promises = this.adminService.data.type === 2 ? cart.items.map(x => this.itemService.getItem(x.item.title)) : cart.items.map(x => this.itemService.getItem(x.item.key));
     return Promise.all(promises).then(result => {
       return Promise.resolve({
-        success: result.every(x => parseInt(x.amount) >= cart.items.find(y => y.item.key === x.key).quantity),
-        failed: result.filter(x => parseInt(x.amount) < cart.items.find(y => y.item.key === x.key).quantity).map(y => y.key === cart.items.find(z => z.item.key === y.key))
+        success: result.every(x => parseInt(x.amount) >= cart.items.find(y => this.adminService.data.type === 2 ? y.item.title === x.title : y.item.key === x.key).quantity),
+        failed: result.filter(x => parseInt(x.amount) < cart.items.find(y => this.adminService.data.type === 2 ? y.item.title === x.title : y.item.key === x.key).quantity).map(y => y.key === cart.items.find(z => this.adminService.data.type === 2 ? z.item.title === y.title : z.item.key === y.key))
       });
     });
   }
