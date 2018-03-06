@@ -28,7 +28,7 @@ export class ItemPage {
   ) {
     this.url = this.fileService.url + '/';
     if (this.adminService.data.username === "info@jiznikorea.eu" ||
-      this.adminService.data.username === "vsebesta@vinova.cz") {
+      this.adminService.data.type === 2) {
       this.url = "";
     }
     this.modalService.showWait(this.itemService.getItem(this.navParams.get("key"))).then(item => {

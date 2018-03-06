@@ -15,8 +15,7 @@ export class ShoptetxmlfeedService {
   constructor(
     private http: Http,
     private adminService: AdminService,
-    private fileService: FileService,
-    private utilsService: Utils
+    private fileService: FileService
   ) {
   }
 

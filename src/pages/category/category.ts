@@ -49,11 +49,11 @@ export class CategoryPage {
     this.category = this.navParams.get("category");
     this.url = this.fileService.url + '/';
     if (this.adminService.data.username === "info@jiznikorea.eu" ||
-      this.adminService.data.username === "vsebesta@vinova.cz") {
+      this.adminService.data.type === 2) {
       this.url = "";
     }
 
-    let p = this.adminService.data.username === "vsebesta@vinova.cz" ? this.shoptetxmlfeedService.getByCategory(this.category.title) : this.itemService.getByCategory(this.category.key);
+    let p = this.adminService.data.type === 2 ? this.shoptetxmlfeedService.getByCategory(this.category.title) : this.itemService.getByCategory(this.category.key);
 
     this.modalService.showWait(p).then(items => {
       this.items = items;

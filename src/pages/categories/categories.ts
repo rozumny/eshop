@@ -23,7 +23,7 @@ export class CategoriesPage {
     public modalService: ModalService
   ) {
 
-    let p = this.adminService.data.username === "vsebesta@vinova.cz" ? this.shoptetxmlfeedService.getAllCategories() : categoryService.getAll();
+    let p = this.adminService.data.type === 2 ? this.shoptetxmlfeedService.getAllCategories() : categoryService.getAll();
     this.modalService.showWait(p).then(categories => {
       this.categories = categories;
     });

@@ -46,7 +46,7 @@ export class HomePage {
           return this.init();
         }));
       } else { //fallback to korea eshop
-        this.modalService.showWait(this.adminService.get("korea").then(data => {
+        this.modalService.showWait(this.adminService.get("zameckesklepy").then(data => {
           this.title = data.name;
           this.events.publish("updatePages");
           return this.init();
@@ -61,7 +61,7 @@ export class HomePage {
   init(): Promise<any> {
     this.url = this.fileService.url + '/';
     if (this.adminService.data.username === "info@jiznikorea.eu" ||
-      this.adminService.data.username === "vsebesta@vinova.cz") {
+      this.adminService.data.type === 2) {
       this.url = "";
     }
 
